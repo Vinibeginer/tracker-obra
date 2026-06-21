@@ -914,27 +914,100 @@ textarea { resize: vertical; min-height: 60px; }
 
     <!-- RESUMO MEDIÇÃO (admin) -->
     <div id="tab-medicao" class="panel">
-      <div class="alert alert-info">Estimativa do valor passível de ser liberado na próxima medição CAIXA.</div>
+
+      <!-- medições confirmadas -->
+      <div class="sect-title" style="margin-top:0">Medições confirmadas pela CAIXA</div>
+      <div class="table-wrap" style="margin-bottom:1.5rem;">
+        <table class="resumo-table">
+          <thead>
+            <tr>
+              <th class="center" style="width:60px">Medição</th>
+              <th>Data</th>
+              <th class="right">% CAIXA</th>
+              <th class="right">Valor liberado</th>
+              <th class="right">Acumulado</th>
+              <th class="center">Status</th>
+              <th class="center admin-only">Ação</th>
+            </tr>
+          </thead>
+          <tbody id="med-confirmadas-tbody"></tbody>
+          <tfoot>
+            <tr class="total liberado">
+              <td colspan="2">Total confirmado pela CAIXA</td>
+              <td class="right" id="med-conf-pct-total">—</td>
+              <td class="right" id="med-conf-val-total">—</td>
+              <td class="right" id="med-conf-acum">—</td>
+              <td colspan="2"></td>
+            </tr>
+            <tr class="total">
+              <td colspan="2">Saldo CAIXA disponível</td>
+              <td></td>
+              <td class="right" id="med-conf-saldo">—</td>
+              <td colspan="3" style="font-size:11px;color:var(--text2)">financiamento − total confirmado</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <!-- confirmar nova medição -->
+      <div class="sect-title admin-only">Confirmar nova medição CAIXA</div>
+      <div class="form-card admin-only" style="margin-bottom:1.5rem;">
+        <div class="alert alert-info" style="margin-bottom:0.75rem;">
+          Quando a CAIXA liberar o valor, registre aqui. O tracker move automaticamente de "estimado" para "confirmado".
+        </div>
+        <div class="form-grid" style="grid-template-columns:1fr 1fr 1fr;">
+          <div class="form-group">
+            <label>Data do desbloqueio</label>
+            <input type="date" id="med-inp-data" />
+          </div>
+          <div class="form-group">
+            <label>Valor liberado (R$)</label>
+            <input type="text" id="med-inp-valor" placeholder="Ex: 20.084,39" />
+          </div>
+          <div class="form-group">
+            <label>Nº documento / referência</label>
+            <input type="text" id="med-inp-ref" placeholder="Ex: doc 662251" />
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:0.75rem;">
+          <label>Itens cobertos (resumo)</label>
+          <input type="text" id="med-inp-itens" placeholder="Ex: impermeabilização 60% + esgoto 100% + magro 100%" />
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <button class="btn btn-success" onclick="confirmarMedicao()">
+            <i class="ti ti-check" aria-hidden="true"></i> Confirmar medição
+          </button>
+          <span class="msg" id="med-msg"></span>
+        </div>
+      </div>
+
+      <!-- estimativa próxima medição -->
+      <div class="sect-title">Estimativa — próxima medição (pendente vistoria)</div>
+      <div class="alert alert-warn" style="margin-bottom:0.75rem;">
+        Valores <strong>estimados</strong> com base nos itens executados × PCI × fator 0,7533. Só se tornam confirmados após vistoria e desbloqueio pela CAIXA.
+      </div>
       <div class="table-wrap">
         <table class="resumo-table">
           <thead>
             <tr>
-              <th>#</th><th>Serviço</th>
+              <th>#</th>
+              <th>Serviço</th>
               <th class="right">% PCI</th>
-              <th class="right">% medível</th>
+              <th class="right">% CAIXA est.</th>
               <th class="right">Valor estimado</th>
               <th>Situação</th>
             </tr>
           </thead>
           <tbody id="medicao-tbody"></tbody>
           <tfoot>
-            <tr class="total"><td colspan="2">Total passível de medição</td><td></td><td class="right" id="med-total-pct">—</td><td class="right" id="med-total-val">—</td><td></td></tr>
-            <tr class="total liberado"><td colspan="2">Já liberado (1ª medição)</td><td></td><td class="right">8,23%</td><td class="right">R$ 30.623</td><td></td></tr>
-            <tr class="total a-medir"><td colspan="2">Saldo a liberar</td><td></td><td class="right" id="med-novo-pct">—</td><td class="right" id="med-novo-val">—</td><td></td></tr>
+            <tr class="total"><td colspan="2">Total estimado passível de medição</td><td></td><td class="right" id="med-total-pct">—</td><td class="right" id="med-total-val">—</td><td></td></tr>
+            <tr class="total a-medir"><td colspan="2">Estimativa de nova liberação</td><td></td><td class="right" id="med-novo-pct">—</td><td class="right" id="med-novo-val">—</td><td></td></tr>
           </tfoot>
         </table>
       </div>
-      <div class="alert alert-warn" style="margin-top:1rem;">Entregar PLS ao RT antes de solicitar vistoria CAIXA. Assinar RT + devedor.</div>
+      <div class="alert alert-warn" style="margin-top:1rem;">
+        Entregar PLS ao RT antes de solicitar vistoria CAIXA. PLS deve ter fotos de cada item e ser assinada pelo RT + devedor.
+      </div>
     </div>
 
     <!-- HISTÓRICO -->
@@ -1333,19 +1406,20 @@ textarea { resize: vertical; min-height: 60px; }
 
 <script>
 /* ══ VERSÃO ════════════════════════════════════════════════════ */
-const APP_VERSION = '1.10';
+const APP_VERSION = '1.11';
 const VERSOES = [
   { v:'1.0',  data:'19/06/2026', autor:'Claude', desc:'Criação do tracker — PCI, cronograma e histórico base' },
   { v:'1.1',  data:'19/06/2026', autor:'Claude', desc:'Adição do sistema de login (admin/visitante) com senha hash SHA-256' },
   { v:'1.2',  data:'19/06/2026', autor:'Claude', desc:'Aba de mão de obra — Barros Rezende · teto R$ 115.000 · projeção e comprovantes' },
   { v:'1.3',  data:'19/06/2026', autor:'Claude', desc:'Aba de materiais — controle de compras por categoria com gráfico de proporção' },
-  { v:'1.4',  data:'21/06/2026', autor:'Claude', desc:'Correção: impermeabilização 60% (só cinta) · elétrica 10% · concreto magro ≠ contrapiso · esgoto sanitário separado de pluvial' },
-  { v:'1.5',  data:'21/06/2026', autor:'Claude', desc:'Itens PCI atualizados com dados do projeto aprovado (3 pavimentos, 227m², 22 portas, 18 janelas)' },
+  { v:'1.4',  data:'21/06/2026', autor:'Claude', desc:'Correção: impermeabilização 60% · elétrica 10% · concreto magro ≠ contrapiso · esgoto separado de pluvial' },
+  { v:'1.5',  data:'21/06/2026', autor:'Claude', desc:'Itens PCI atualizados com projeto aprovado (3 pavimentos, 227m², 22 portas, 18 janelas)' },
   { v:'1.6',  data:'21/06/2026', autor:'Claude', desc:'Aba de recursos — composição CAIXA/próprios/FGTS · estratégia de desembolso por fase' },
-  { v:'1.7',  data:'21/06/2026', autor:'Claude', desc:'Aba de cronograma — 9 medições previstas · conclusão jul/2027 · economia R$ 38.654 em encargos' },
-  { v:'1.8',  data:'21/06/2026', autor:'Claude', desc:'Recálculo com escala 78% (CAIXA/obra) · % medição = % PCI × 0,7533 · tabela por medição atualizada' },
+  { v:'1.7',  data:'21/06/2026', autor:'Claude', desc:'Aba de cronograma — 9 medições previstas · conclusão jul/2027 · economia R$ 38.654' },
+  { v:'1.8',  data:'21/06/2026', autor:'Claude', desc:'Escala 78% (CAIXA/obra) · % medição = % PCI × 0,7533 · tabela por medição atualizada' },
   { v:'1.9',  data:'21/06/2026', autor:'Claude', desc:'Projeção 2ª medição detalhada item a item · controle de versionamento implementado' },
-  { v:'1.10', data:'21/06/2026', autor:'Claude', desc:'Correção de consistência: separação clara entre CONFIRMADO (8,23% · R$ 30.623) e ESTIMADO — cards, barra e saldo corrigidos' },
+  { v:'1.10', data:'21/06/2026', autor:'Claude', desc:'Separação confirmado vs estimado — cards, barra e saldo corrigidos' },
+  { v:'1.11', data:'21/06/2026', autor:'Claude', desc:'Aba medição com confirmação direta no tracker — botão "Confirmar medição CAIXA" · histórico automático' },
 ];
 
 /* ══ CONFIG ══════════════════════════════════════════════════ */
@@ -1772,7 +1846,8 @@ function showTab(t, el) {
   document.getElementById('tab-'+t).classList.add('active');
   el.classList.add('active');
   if(t==='historico') buildLog();
-  if(t==='versoes') buildVersoes();
+  if(t==='versoes')   buildVersoes();
+  if(t==='medicao')   buildMedicoesConfirmadas();
 }
 
 /* ══ MÃO DE OBRA ══════════════════════════════════════════════ */
@@ -2193,6 +2268,138 @@ function removerMat(idx) {
   salvarMat(); buildAllMat();
 }
 
+/* ══ MEDIÇÕES CONFIRMADAS ════════════════════════════════════ */
+const MEDICOES_DEF = [
+  { num:1, data:'30/05/2026', pctCaixa:8.23, valor:30623.00, ref:'Doc 662250 · Ag. 4437', itens:'Serviços preliminares + infraestrutura (sapatas, baldrames)', confirmada:true },
+];
+
+let medicoesConfirmadas = JSON.parse(JSON.stringify(MEDICOES_DEF));
+
+function salvarMedicoes() {
+  const raw    = localStorage.getItem(STORAGE_KEY);
+  const estado = raw ? JSON.parse(raw) : {};
+  estado.medicoesConfirmadas = medicoesConfirmadas;
+  estado.savedAt = new Date().toISOString();
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(estado));
+  atualizarTimestamp();
+}
+
+function carregarMedicoes() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) return;
+  try {
+    const e = JSON.parse(raw);
+    if (e.medicoesConfirmadas) medicoesConfirmadas = e.medicoesConfirmadas;
+  } catch(e) {}
+}
+
+function totalConfirmado() {
+  return medicoesConfirmadas.reduce((s, m) => s + m.valor, 0);
+}
+
+function buildMedicoesConfirmadas() {
+  const tb   = document.getElementById('med-confirmadas-tbody');
+  if (!tb) return;
+  tb.innerHTML = '';
+  let acum = 0;
+
+  medicoesConfirmadas.forEach((m, idx) => {
+    acum += m.valor;
+    const tr = document.createElement('tr');
+    tr.style.background = '#E1F5EE';
+    tr.innerHTML = `
+      <td class="center"><span class="badge b-medido">${m.num}ª ✓</span></td>
+      <td style="font-size:12px;white-space:nowrap">${m.data}</td>
+      <td class="right" style="font-weight:600;color:var(--green)">${fmtP(m.pctCaixa)}</td>
+      <td class="right" style="font-weight:600;color:var(--green)">${fmt(m.valor)}</td>
+      <td class="right">${fmt(acum)}</td>
+      <td class="center"><span class="badge b-medido">Confirmado ✓</span></td>
+      <td class="center admin-only">
+        ${idx >= MEDICOES_DEF.length ? `<button class="btn btn-danger btn-sm" onclick="removerMedicao(${idx})">✕</button>` : '<span style="color:var(--text3);font-size:11px">base</span>'}
+      </td>
+    `;
+    tb.appendChild(tr);
+  });
+
+  const total     = totalConfirmado();
+  const totalPct  = medicoesConfirmadas.reduce((s, m) => s + m.pctCaixa, 0);
+  const saldo     = BASE_OBRA - total;
+
+  const elPct  = document.getElementById('med-conf-pct-total');
+  const elVal  = document.getElementById('med-conf-val-total');
+  const elAcum = document.getElementById('med-conf-acum');
+  const elSaldo= document.getElementById('med-conf-saldo');
+  if (elPct)  elPct.textContent  = fmtP(totalPct);
+  if (elVal)  elVal.textContent  = fmt(total);
+  if (elAcum) elAcum.textContent = fmt(total);
+  if (elSaldo)elSaldo.textContent= fmt(saldo);
+
+  // atualizar card confirmado no topo
+  const cMedido = document.getElementById('c-medido');
+  const cMedSub = document.getElementById('c-medido-sub');
+  if (cMedido) cMedido.textContent = fmtP(totalPct);
+  if (cMedSub) {
+    const ultima = medicoesConfirmadas[medicoesConfirmadas.length - 1];
+    cMedSub.textContent = `${fmt(total)} · ${medicoesConfirmadas.length}ª med. ${ultima.data}`;
+  }
+
+  // atualizar MED_PCT_ATUAL para recalcular
+  window.MED_PCT_ATUAL = totalPct;
+  window.MED_VAL_ATUAL = total;
+}
+
+function confirmarMedicao() {
+  const dataVal = document.getElementById('med-inp-data').value;
+  const valorStr= document.getElementById('med-inp-valor').value.replace(/\./g,'').replace(',','.');
+  const ref     = document.getElementById('med-inp-ref').value.trim();
+  const itens   = document.getElementById('med-inp-itens').value.trim();
+  const msg     = document.getElementById('med-msg');
+  const valor   = parseFloat(valorStr);
+
+  if (!dataVal || isNaN(valor) || valor <= 0) {
+    msg.textContent = 'Preencha data e valor.';
+    msg.className = 'msg error'; return;
+  }
+
+  const dateStr  = new Date(dataVal + 'T12:00:00').toLocaleDateString('pt-BR');
+  const pctCaixa = valor / BASE_OBRA * 100;
+  const num      = medicoesConfirmadas.length + 1;
+
+  medicoesConfirmadas.push({ num, data:dateStr, pctCaixa, valor, ref, itens, confirmada:true });
+
+  // registrar no histórico
+  historico.push({
+    data: dateStr,
+    desc: `${num}ª Medição CAIXA confirmada — ${itens || 'itens conforme PLS'}`,
+    deltaPct: pctCaixa,
+    deltaVal: valor,
+    prev: false,
+    obs: ref
+  });
+
+  msg.textContent = `✓ ${num}ª medição confirmada: ${fmt(valor)}`;
+  msg.className = 'msg';
+  setTimeout(() => { msg.textContent = ''; }, 4000);
+
+  document.getElementById('med-inp-data').value   = new Date().toISOString().split('T')[0];
+  document.getElementById('med-inp-valor').value  = '';
+  document.getElementById('med-inp-ref').value    = '';
+  document.getElementById('med-inp-itens').value  = '';
+
+  salvarMedicoes(); salvar();
+  buildMedicoesConfirmadas();
+  buildLog();
+  recalcular();
+}
+
+function removerMedicao(idx) {
+  if (!confirm('Remover esta medição confirmada?')) return;
+  medicoesConfirmadas.splice(idx, 1);
+  salvarMedicoes();
+  buildMedicoesConfirmadas();
+  recalcular();
+}
+
 /* ══ VERSÕES ══════════════════════════════════════════════════ */
 function buildVersoes() {
   const el = document.getElementById('versao-atual-label');
@@ -2232,11 +2439,14 @@ function buildVersoes() {
 function iniciarAppMO() {
   carregarMO();
   carregarMat();
+  carregarMedicoes();
   buildMOSelectItens();
   buildAllMO();
   buildAllMat();
+  buildMedicoesConfirmadas();
   document.getElementById('mo-inp-data').value  = new Date().toISOString().split('T')[0];
   document.getElementById('mat-inp-data').value = new Date().toISOString().split('T')[0];
+  document.getElementById('med-inp-data').value = new Date().toISOString().split('T')[0];
 }
 </script>
 </body>
