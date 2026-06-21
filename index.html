@@ -1406,7 +1406,7 @@ textarea { resize: vertical; min-height: 60px; }
 
 <script>
 /* ══ VERSÃO ════════════════════════════════════════════════════ */
-const APP_VERSION = '1.11';
+const APP_VERSION = '1.12';
 const VERSOES = [
   { v:'1.0',  data:'19/06/2026', autor:'Claude', desc:'Criação do tracker — PCI, cronograma e histórico base' },
   { v:'1.1',  data:'19/06/2026', autor:'Claude', desc:'Adição do sistema de login (admin/visitante) com senha hash SHA-256' },
@@ -1420,6 +1420,7 @@ const VERSOES = [
   { v:'1.9',  data:'21/06/2026', autor:'Claude', desc:'Projeção 2ª medição detalhada item a item · controle de versionamento implementado' },
   { v:'1.10', data:'21/06/2026', autor:'Claude', desc:'Separação confirmado vs estimado — cards, barra e saldo corrigidos' },
   { v:'1.11', data:'21/06/2026', autor:'Claude', desc:'Aba medição com confirmação direta no tracker — botão "Confirmar medição CAIXA" · histórico automático' },
+  { v:'1.12', data:'22/06/2026', autor:'Claude', desc:'Previsão alvenaria+pilares corrigida: horizonte de 4 semanas (22/06–18/07/2026), não semana única' },
 ];
 
 /* ══ CONFIG ══════════════════════════════════════════════════ */
@@ -1510,8 +1511,8 @@ function aplicarPerfil() {
 const ITENS_DEFAULT = [
   { id:1,   desc:'Barracão + ligações provisórias + projetos',                     pciPct:3.64,  exec:100, locked:true,  prevExec:0, obs:'Concluído.' },
   { id:2,   desc:'Infraestrutura (sapatas, baldrames, alicerce — 3 pavimentos)',   pciPct:7.07,  exec:100, locked:true,  prevExec:0, obs:'Fundações dimensionadas para os 3 pavimentos (227m²). Concluído.' },
-  { id:3,   desc:'Supraestrutura — pilares, vigas e escada interna (3 pav.)',      pciPct:14.56, exec:0,   locked:false, prevExec:25, obs:'Inclui pilares e vigas do térreo, 1º e 2º pavimento + escada interna. Previsão: início semana 22–26/06.' },
-  { id:4,   desc:'Paredes e alvenaria — térreo, 1º e 2º pavimento',               pciPct:8.14,  exec:0,   locked:false, prevExec:30, obs:'Térreo: sala, cozinha, quarto, suíte, garagem. 1ºpav: 3 quartos, closets, banheiros. 2ºpav: mureta/platibanda.' },
+  { id:3,   desc:'Supraestrutura — pilares, vigas e escada interna (3 pav.)',      pciPct:14.56, exec:0,   locked:false, prevExec:25, obs:'Inclui pilares e vigas do térreo, 1º e 2º pavimento + escada interna. Previsão: ~25% ao longo de 4 semanas (22/06–18/07/2026).' },
+  { id:4,   desc:'Paredes e alvenaria — térreo, 1º e 2º pavimento',               pciPct:8.14,  exec:0,   locked:false, prevExec:30, obs:'Térreo: sala, cozinha, quarto, suíte, garagem. 1ºpav: 3 quartos, closets, banheiros. 2ºpav: mureta/platibanda. Previsão: ~30% ao longo de 4 semanas (22/06–18/07/2026).' },
   { id:5,   desc:'Esquadrias — 22 portas (P1–P9) e 18 janelas (J1–J7)',           pciPct:4.71,  exec:0,   locked:false, prevExec:0,  obs:'Portas: P1×4, P2×9, P3×1, P4×1, P5×2, P6×2, P7×1, P8×1, P9×1. Janelas: J1×4, J2×5, J3×2, J4×1, J5×2, J6×2, J7×2.' },
   { id:6,   desc:'Vidros, plásticos e guarda-corpos',                             pciPct:1.07,  exec:0,   locked:false, prevExec:0,  obs:'Guarda-corpo preto varanda coberta + varanda descoberta. Vidros das janelas.' },
   { id:7,   desc:'Cobertura — telha fibrocimento, platibanda e laje 2º pav.',     pciPct:2.57,  exec:0,   locked:false, prevExec:0,  obs:'Telha fibrocimento c/ platibanda sobre 1ºpav. Laje impermeabilizada 2ºpav (varanda descoberta 37,85m²) inclinação 9,86%.' },
@@ -1539,7 +1540,7 @@ const HISTORICO_DEFAULT = [
   { data:'19/06/2026', desc:'Impermeabilização: somente a cinta concluída (60%)', deltaPct:1.54, deltaVal:5750, prev:false, obs:'Confirmado pelo engenheiro — 60%. Falta laje 2ºpav e varanda descoberta.' },
   { data:'19/06/2026', desc:'Padrão de energia instalado — elétrica 10%', deltaPct:0.41, deltaVal:1518, prev:false, obs:'Confirmado pelo engenheiro. Falta infra interna 3 pavimentos e conexão concessionária.' },
   { data:'19/06/2026', desc:'Hidráulica: ramais internos térreo — 30%', deltaPct:1.22, deltaVal:4553, prev:false, obs:'Ramais internos parciais. Falta ramal de entrada e 1º pavimento.' },
-  { data:'22–26/06/2026', desc:'[Previsão] Entijolamento (alvenaria) + enchimento de colunas (pilares)', deltaPct:6.08, deltaVal:22671, prev:true, obs:'Alvenaria 30% + supraestrutura 25% conforme cronograma Barros Rezende.' },
+  { data:'22/06–18/07/2026', desc:'[Previsão] Entijolamento (alvenaria) + enchimento de colunas (pilares)', deltaPct:6.08, deltaVal:22671, prev:true, obs:'Alvenaria 30% + supraestrutura 25% — distribuído ao longo de ~4 semanas. Não é avanço de uma semana única.' },
 ];
 
 let itens     = JSON.parse(JSON.stringify(ITENS_DEFAULT));
@@ -2451,3 +2452,4 @@ function iniciarAppMO() {
 </script>
 </body>
 </html>
+
