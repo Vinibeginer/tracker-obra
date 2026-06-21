@@ -288,19 +288,19 @@ textarea { resize: vertical; min-height: 60px; }
         <div class="card-sub" id="c-medido-sub">R$ 30.623 · 1ª med. 30/05/2026</div>
       </div>
       <div class="card info">
-        <div class="card-label">Executado físico (estimado)</div>
+        <div class="card-label">Executado físico (não medido)</div>
         <div class="card-value" id="c-exec">—</div>
-        <div class="card-sub" id="c-exec-sub">base PCI — não medido ainda</div>
+        <div class="card-sub" id="c-exec-sub">% PCI · % CAIXA estimado</div>
       </div>
       <div class="card warn">
-        <div class="card-label">Estimativa 2ª medição</div>
+        <div class="card-label">Estimativa próx. medição CAIXA</div>
         <div class="card-value" id="c-novo">—</div>
-        <div class="card-sub" id="c-novo-sub">pendente vistoria CAIXA</div>
+        <div class="card-sub" id="c-novo-sub">só itens executados · sem previsões</div>
       </div>
       <div class="card dash">
-        <div class="card-label">Projeção semana seguinte</div>
+        <div class="card-label">Com previsões incluídas</div>
         <div class="card-value" id="c-prev">—</div>
-        <div class="card-sub" id="c-prev-sub">—</div>
+        <div class="card-sub" id="c-prev-sub">se confirmadas na próx. semana</div>
       </div>
       <div class="card admin-only">
         <div class="card-label">Saldo CAIXA disponível</div>
@@ -323,8 +323,8 @@ textarea { resize: vertical; min-height: 60px; }
     </div>
     <div class="legend">
       <span><div class="dot" style="background:var(--green-mid)"></div><strong>Confirmado CAIXA</strong> — 8,23% · R$ 30.623 (1ª medição)</span>
-      <span><div class="dot" style="background:var(--blue-mid);opacity:0.55"></div>Estimado executado (pendente vistoria)</span>
-      <span><div class="dot-dash"></div>Previsão próx. semana</span>
+      <span><div class="dot" style="background:var(--blue-mid);opacity:0.55"></div>Executado físico não medido (% CAIXA estimado)</span>
+      <span><div class="dot-dash"></div>Previsão pendente confirmação</span>
       <span><div class="dot" style="background:var(--surface2);border:1px solid var(--border2)"></div>Saldo a liberar</span>
     </div>
 
@@ -983,7 +983,7 @@ textarea { resize: vertical; min-height: 60px; }
       <!-- estimativa próxima medição -->
       <div class="sect-title">Estimativa — próxima medição (pendente vistoria)</div>
       <div class="alert alert-warn" style="margin-bottom:0.75rem;">
-        Valores <strong>estimados</strong> com base nos itens executados × PCI × fator 0,7533. Só se tornam confirmados após vistoria e desbloqueio pela CAIXA.
+        Valores <strong>estimados</strong> — itens executados × PCI × fator 0,7533 (escala CAIXA/obra). Linhas em cinza = previsão pendente. Só se tornam confirmados após vistoria e desbloqueio pela CAIXA.
       </div>
       <div class="table-wrap">
         <table class="resumo-table">
@@ -991,16 +991,17 @@ textarea { resize: vertical; min-height: 60px; }
             <tr>
               <th>#</th>
               <th>Serviço</th>
-              <th class="right">% PCI</th>
-              <th class="right">% CAIXA est.</th>
-              <th class="right">Valor estimado</th>
+              <th class="right">% PCI total</th>
+              <th class="right">% PCI exec.</th>
+              <th class="right" style="color:var(--amber)">% CAIXA est.</th>
+              <th class="right">Valor est.</th>
               <th>Situação</th>
             </tr>
           </thead>
           <tbody id="medicao-tbody"></tbody>
           <tfoot>
-            <tr class="total"><td colspan="2">Total estimado passível de medição</td><td></td><td class="right" id="med-total-pct">—</td><td class="right" id="med-total-val">—</td><td></td></tr>
-            <tr class="total a-medir"><td colspan="2">Estimativa de nova liberação</td><td></td><td class="right" id="med-novo-pct">—</td><td class="right" id="med-novo-val">—</td><td></td></tr>
+            <tr class="total"><td colspan="3">Total executado (% PCI físico)</td><td class="right" id="med-total-pct">—</td><td></td><td class="right" id="med-total-val">—</td><td></td></tr>
+            <tr class="total a-medir"><td colspan="3">Estimativa liberação CAIXA (só executados)</td><td></td><td class="right" id="med-novo-pct">—</td><td class="right" id="med-novo-val">—</td><td></td></tr>
           </tfoot>
         </table>
       </div>
@@ -1405,7 +1406,7 @@ textarea { resize: vertical; min-height: 60px; }
 
 <script>
 /* ══ VERSÃO ════════════════════════════════════════════════════ */
-const APP_VERSION = '1.17';
+const APP_VERSION = '1.18';
 const VERSOES = [
   { v:'1.0',  data:'19/06/2026', autor:'Claude', desc:'Criação do tracker — PCI, cronograma e histórico base' },
   { v:'1.1',  data:'19/06/2026', autor:'Claude', desc:'Adição do sistema de login (admin/visitante) com senha hash SHA-256' },
@@ -1425,6 +1426,7 @@ const VERSOES = [
   { v:'1.15', data:'22/06/2026', autor:'Claude', desc:'Materiais: 24 compras integradas do localStorage (R$ 37.545) — ferragem, cimento, brita, tijolos, piso, esgoto, elétrica e outros' },
   { v:'1.16', data:'22/06/2026', autor:'Claude', desc:'Auto-publish GitHub: ao registrar ou remover material, tracker atualiza o arquivo base automaticamente' },
   { v:'1.17', data:'22/06/2026', autor:'Claude', desc:'Auto-publish expandido para todas as abas: itens PCI, histórico, mão de obra, medições CAIXA e materiais' },
+  { v:'1.18', data:'22/06/2026', autor:'Claude', desc:'Cards separados: executado físico vs estimativa CAIXA vs com previsões · % CAIXA por item na tabela de medição · mensagem de avanço mostra delta PCI + CAIXA + valor' },
 ];
 
 /* ══ CONFIG ══════════════════════════════════════════════════ */
@@ -1662,74 +1664,103 @@ function barColor(item) {
 
 /* ══ RECALCULAR ══════════════════════════════════════════════ */
 function recalcular() {
-  let execAcum = 0, prevAcum = 0;
+  // execAcum = só itens com exec > 0 (inclui locked já medidos)
+  // execNovo = itens com exec > 0 mas NÃO locked (ainda não medidos pela CAIXA)
+  // prevAcum = execNovo + previsões pendentes
+  let execAcum = 0, execNovo = 0, prevAcum = 0;
   itens.forEach(i => {
-    execAcum += i.pciPct * i.exec / 100;
-    prevAcum += i.pciPct * Math.min(i.exec + i.prevExec, 100) / 100;
+    const execPct = i.pciPct * i.exec / 100;
+    execAcum += execPct;
+    if (!i.locked) {
+      execNovo += execPct;
+      prevAcum += i.pciPct * Math.min(i.exec + i.prevExec, 100) / 100;
+    }
   });
-  const novoMed  = Math.max(0, execAcum - MED_PCT);
-  const novoVal  = novoMed / 100 * BASE_OBRA;
-  const execVal  = execAcum / 100 * BASE_OBRA;
-  const prevAdic = Math.max(0, (Math.max(0, prevAcum - MED_PCT) / 100 * BASE_OBRA) - novoVal);
-  const saldo    = Math.max(0, BASE_OBRA - MED_VAL - novoVal);
-  const totalLib = MED_VAL + novoVal;
 
-  // cards — visitante vê % mas não valores
-  document.getElementById('c-exec').textContent    = fmtP(execAcum);
-  document.getElementById('c-exec-sub').textContent = isAdmin ? '~' + fmt(execVal) + ' estimado' : 'base PCI — não medido ainda';
-  document.getElementById('c-novo').textContent    = '~' + fmtP(novoMed);
-  document.getElementById('c-novo-sub').innerHTML  = isAdmin ? '~' + fmt(novoVal) + ' · pendente vistoria' : '<span class="lock-note">🔒 restrito</span>';
-  document.getElementById('c-prev').textContent    = '~' + fmtP(prevAcum);
-  document.getElementById('c-prev-sub').innerHTML  = isAdmin ? '+~' + fmt(prevAdic) + ' adicionais' : '<span class="lock-note">🔒 restrito</span>';
+  // % CAIXA = % PCI × 0,7533
+  const ESCALA = 0.7533;
+  const execNovoCaixa = execNovo * ESCALA;           // executado não medido → estimativa próx. medição
+  const prevCaixa     = prevAcum * ESCALA;           // com previsões incluídas
+  const novoVal       = execNovoCaixa / 100 * BASE_OBRA;
+  const prevAdic      = Math.max(0, (prevCaixa - execNovoCaixa) / 100 * BASE_OBRA);
+  const execVal       = execNovo / 100 * BASE_OBRA;
+
+  // cards
+  document.getElementById('c-exec').textContent     = fmtP(execNovo);
+  document.getElementById('c-exec-sub').textContent = isAdmin
+    ? `~${fmt(execVal)} · ${fmtP(execNovoCaixa)} CAIXA`
+    : 'executado físico — pendente vistoria';
+
+  document.getElementById('c-novo').textContent    = '~' + fmtP(execNovoCaixa);
+  document.getElementById('c-novo-sub').innerHTML  = isAdmin
+    ? `~${fmt(novoVal)} · só itens executados (sem previsões)`
+    : '<span class="lock-note">🔒 restrito</span>';
+
+  document.getElementById('c-prev').textContent    = '~' + fmtP(prevCaixa);
+  document.getElementById('c-prev-sub').innerHTML  = isAdmin
+    ? `+~${fmt(prevAdic)} c/ previsões · total ~${fmt(novoVal + prevAdic)}`
+    : '<span class="lock-note">🔒 restrito</span>';
 
   if (isAdmin) {
-    // saldo e total usam APENAS o valor confirmado (MED_VAL = 1ª medição)
     const saldoConfirmado = BASE_OBRA - MED_VAL;
-    document.getElementById('c-saldo').textContent       = fmt(saldoConfirmado);
-    document.getElementById('c-total-lib').textContent   = fmt(MED_VAL);
+    document.getElementById('c-saldo').textContent         = fmt(saldoConfirmado);
+    document.getElementById('c-total-lib').textContent     = fmt(MED_VAL);
     document.getElementById('c-total-lib-sub').textContent = fmtP(MED_VAL/BASE_OBRA*100) + '% confirmado · ' + fmt(saldoConfirmado) + ' a liberar';
   }
 
-  document.getElementById('tfoot-exec').textContent = fmtP(execAcum);
+  document.getElementById('tfoot-exec').textContent = fmtP(execNovo);
 
-  // barra
-  const m = Math.min(MED_PCT, 100);
-  const e = Math.min(novoMed, 100 - m);
-  const p = Math.min(Math.max(0, prevAcum - execAcum), 100 - m - e);
+  // barra — confirmado | executado não medido | previsão
+  const m = Math.min(window.MED_PCT_ATUAL ?? MED_PCT, 100);
+  const e = Math.min(execNovoCaixa, 100 - m);
+  const p = Math.min(Math.max(0, prevCaixa - execNovoCaixa), 100 - m - e);
   document.getElementById('bar-medido').style.width = m + '%';
-  document.getElementById('bar-medido').textContent = m > 3 ? fmtP(m) : '';
+  document.getElementById('bar-medido').textContent = m > 3 ? fmtP(m) + ' ✓' : '';
   document.getElementById('bar-exec').style.left    = m + '%';
   document.getElementById('bar-exec').style.width   = e + '%';
-  document.getElementById('bar-exec').textContent   = e > 2 ? '+' + fmtP(e) : '';
+  document.getElementById('bar-exec').textContent   = e > 2 ? '~' + fmtP(e) : '';
   document.getElementById('bar-prev').style.left    = (m+e) + '%';
   document.getElementById('bar-prev').style.width   = p + '%';
 
-  if (isAdmin) buildMedicao(execAcum, novoMed, novoVal);
+  if (isAdmin) buildMedicao(execNovo, execNovoCaixa, novoVal);
   buildPrevisaoRapida();
 }
 
-function buildMedicao(execAcum, novoMed, novoVal) {
+function buildMedicao(execNovo, execNovoCaixa, novoVal) {
+  const ESCALA = 0.7533;
   const tb = document.getElementById('medicao-tbody');
   tb.innerHTML = '';
   itens.forEach(item => {
-    if (item.exec===0 || (item.locked && item.exec===100)) return;
-    const medPct = item.pciPct * item.exec / 100;
-    if (medPct===0) return;
-    const [cls,lbl] = statusBadge(item);
+    if (item.locked) return; // já medido — não entra na estimativa
+    if (item.exec === 0 && item.prevExec === 0) return;
+    const execPct  = item.pciPct * item.exec / 100;
+    const execCaixa= execPct * ESCALA;
+    const prevPct  = item.prevExec > 0 && item.exec < 100 ? item.pciPct * item.prevExec / 100 : 0;
+    const prevCaixa= prevPct * ESCALA;
+    const isPrev   = item.exec === 0 && item.prevExec > 0;
+    const [cls,lbl]= statusBadge(item);
     const tr = document.createElement('tr');
+    tr.style.background = isPrev ? 'var(--surface2)' : '';
     tr.innerHTML = `
       <td style="color:var(--text3);font-size:12px">${item.id}</td>
-      <td>${item.desc}</td>
-      <td class="right">${fmtP(item.pciPct)}</td>
-      <td class="right" style="font-weight:500;color:var(--blue)">${fmtP(medPct)}</td>
-      <td class="right" style="font-weight:500">${fmt(medPct/100*BASE_OBRA)}</td>
+      <td>${item.desc}${isPrev?' <em style="font-size:11px;color:var(--text3)">(previsão)</em>':''}</td>
+      <td class="right" style="color:var(--text2)">${fmtP(item.pciPct)}</td>
+      <td class="right" style="font-weight:500;color:${isPrev?'var(--text3)':'var(--blue)'}">
+        ${isPrev ? fmtP(prevPct) : fmtP(execPct)}
+      </td>
+      <td class="right" style="font-weight:600;color:${isPrev?'var(--text3)':'var(--amber)'}">
+        ~${fmtP(isPrev ? prevCaixa : execCaixa)}
+      </td>
+      <td class="right" style="font-weight:500;color:${isPrev?'var(--text3)':'inherit'}">
+        ${isPrev ? '~'+fmt(prevCaixa/100*BASE_OBRA) : '~'+fmt(execCaixa/100*BASE_OBRA)}
+      </td>
       <td><span class="badge ${cls}">${lbl}</span></td>`;
     tb.appendChild(tr);
   });
-  document.getElementById('med-total-pct').textContent = fmtP(execAcum);
-  document.getElementById('med-total-val').textContent  = fmt(execAcum/100*BASE_OBRA);
-  document.getElementById('med-novo-pct').textContent  = fmtP(novoMed);
-  document.getElementById('med-novo-val').textContent   = '~' + fmt(novoVal);
+  document.getElementById('med-total-pct').textContent = fmtP(execNovo);
+  document.getElementById('med-total-val').textContent  = fmt(execNovo/100*BASE_OBRA);
+  document.getElementById('med-novo-pct').textContent  = '~' + fmtP(execNovoCaixa);
+  document.getElementById('med-novo-val').textContent  = '~' + fmt(novoVal);
 }
 
 function buildPrevisaoRapida() {
@@ -1790,15 +1821,17 @@ function registrar() {
   if (tipo==='prev') {
     item.prevExec = pctVal;
     historico.push({ data:dateStr, desc:`[Previsão] ${item.desc} → ${pctVal}%`, deltaPct:item.pciPct*pctVal/100, deltaVal:0, prev:true, obs });
-    msgEl.textContent = 'Previsão salva.';
+    msgEl.textContent = `Previsão salva: ${item.desc} → ${pctVal}%`;
   } else {
     const ant = item.exec;
     item.exec = Math.max(item.exec, pctVal);
     item.prevExec = 0; item.novo = false;
     if (obs) item.obs = obs;
-    const delta = item.pciPct*(item.exec-ant)/100;
-    historico.push({ data:dateStr, desc:`${item.desc} (${ant}% → ${item.exec}%)`, deltaPct:delta, deltaVal:delta/100*BASE_OBRA, prev:false, obs });
-    msgEl.textContent = `✓ ${item.desc} → ${item.exec}%`;
+    const deltaPci  = item.pciPct*(item.exec-ant)/100;
+    const deltaCaixa= deltaPci * 0.7533;
+    const deltaVal  = deltaCaixa/100*BASE_OBRA;
+    historico.push({ data:dateStr, desc:`${item.desc} (${ant}% → ${item.exec}%)`, deltaPct:deltaPci, deltaVal, prev:false, obs });
+    msgEl.textContent = `✓ ${item.desc} → ${item.exec}% · +${fmtP(deltaPci)} PCI · ~+${fmtP(deltaCaixa)} CAIXA · ~${fmt(deltaVal)}`;
   }
   msgEl.className = 'msg';
   document.getElementById('inp-obs').value = '';
