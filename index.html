@@ -297,11 +297,6 @@ textarea { resize: vertical; min-height: 60px; }
         <div class="card-value" id="c-novo">—</div>
         <div class="card-sub" id="c-novo-sub">% PCI × 0,7533 · só executados · sem previsões</div>
       </div>
-      <div class="card dash">
-        <div class="card-label">Com previsões incluídas</div>
-        <div class="card-value" id="c-prev">—</div>
-        <div class="card-sub" id="c-prev-sub">se confirmadas na próx. semana</div>
-      </div>
       <div class="card admin-only">
         <div class="card-label">Saldo CAIXA disponível</div>
         <div class="card-value" id="c-saldo">—</div>
@@ -324,7 +319,6 @@ textarea { resize: vertical; min-height: 60px; }
     <div class="legend">
       <span><div class="dot" style="background:var(--green-mid)"></div><strong>Confirmado CAIXA</strong> — 8,23% · R$ 30.623 (1ª medição)</span>
       <span><div class="dot" style="background:var(--blue-mid);opacity:0.55"></div>Executado físico não medido (% CAIXA estimado)</span>
-      <span><div class="dot-dash"></div>Previsão pendente confirmação</span>
       <span><div class="dot" style="background:var(--surface2);border:1px solid var(--border2)"></div>Saldo a liberar</span>
     </div>
 
@@ -1406,7 +1400,7 @@ textarea { resize: vertical; min-height: 60px; }
 
 <script>
 /* ══ VERSÃO ════════════════════════════════════════════════════ */
-const APP_VERSION = '1.23';
+const APP_VERSION = '1.24';
 const VERSOES = [
   { v:'1.0',  data:'19/06/2026', autor:'Claude', desc:'Criação do tracker — PCI, cronograma e histórico base' },
   { v:'1.1',  data:'19/06/2026', autor:'Claude', desc:'Adição do sistema de login (admin/visitante) com senha hash SHA-256' },
@@ -1432,6 +1426,7 @@ const VERSOES = [
   { v:'1.21', data:'22/06/2026', autor:'Claude', desc:'FGTS removido do cronograma: badges Prop+FGTS → Rec. próprios · fase 5 · explicação e alertas corrigidos' },
   { v:'1.22', data:'22/06/2026', autor:'Claude', desc:'Correção: esgoto 1ºpav removido (sem laje) · 2ª medição corrigida para 3,31% CAIXA ~R$12.340 · histórico limpo · cronograma ajustado' },
   { v:'1.23', data:'22/06/2026', autor:'Claude', desc:'Cards clarificados: "Executado físico (% PCI)" separado de "Estimativa próx. medição (% CAIXA)" · sub mostra relação ×0,7533 explicitamente' },
+  { v:'1.24', data:'22/06/2026', autor:'Claude', desc:'Card "Com previsões" removido — informação ambígua · barra e legenda simplificadas' },
 ];
 
 /* ══ CONFIG ══════════════════════════════════════════════════ */
@@ -1697,12 +1692,7 @@ function recalcular() {
 
   document.getElementById('c-novo').textContent    = '~' + fmtP(execNovoCaixa);
   document.getElementById('c-novo-sub').innerHTML  = isAdmin
-    ? `~${fmt(novoVal)} · só itens executados (sem previsões)`
-    : '<span class="lock-note">🔒 restrito</span>';
-
-  document.getElementById('c-prev').textContent    = '~' + fmtP(prevCaixa);
-  document.getElementById('c-prev-sub').innerHTML  = isAdmin
-    ? `+~${fmt(prevAdic)} c/ previsões · total ~${fmt(novoVal + prevAdic)}`
+    ? `~${fmt(novoVal)} · % PCI × 0,7533 · só executados`
     : '<span class="lock-note">🔒 restrito</span>';
 
   if (isAdmin) {
