@@ -211,67 +211,84 @@ textarea { resize: vertical; min-height: 60px; }
 /* ── RESPONSIVO MOBILE ───────────────────────────────────────── */
 @media (max-width: 768px) {
 
-  /* container sem padding lateral excessivo */
-  .container { padding: 1rem 0.75rem; }
+  /* container */
+  .container { padding: 0.75rem; }
 
-  /* header compacto */
-  .header { padding: 0.7rem 1rem; }
-  .header-left h1 { font-size: 13px; }
+  /* header */
+  .header { padding: 0.65rem 0.75rem; flex-wrap: nowrap; }
+  .header-left h1 { font-size: 12px; line-height: 1.3; }
   .header-left p  { display: none; }
+  .header-right   { gap: 6px; flex-shrink: 0; }
+  .badge-role { font-size: 10px; padding: 2px 7px; }
+  .btn-logout { font-size: 11px; padding: 3px 8px; }
 
-  /* tabs: scroll horizontal em vez de quebrar linha */
-  .tabs { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 2px; scrollbar-width: none; }
+  /* sect-title */
+  .sect-title { font-size: 10px; margin: 0.85rem 0 0.4rem; }
+
+  /* cards: 2 colunas fixas */
+  .cards { grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1rem; }
+  .card { padding: 0.65rem 0.75rem; }
+  .card-label { font-size: 9px; margin-bottom: 4px; line-height: 1.3; }
+  .card-value { font-size: 17px; }
+  .card-sub   { font-size: 10px; line-height: 1.3; margin-top: 3px; word-break: break-word; }
+
+  /* barra: sem texto embutido, só cor */
+  .progress-wrap { height: 18px; border-radius: 5px; }
+  .progress-medido { font-size: 0; padding: 0; }
+  .progress-exec   { font-size: 0; padding: 0; }
+
+  /* legenda abaixo da barra */
+  .legend { flex-direction: column; gap: 5px; font-size: 11px; margin-bottom: 1rem; }
+  .legend span { display: flex; align-items: center; gap: 6px; }
+
+  /* tabs: scroll horizontal sem quebrar */
+  .tabs { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch;
+          gap: 0; padding-bottom: 0; scrollbar-width: none; border-bottom: 1px solid var(--border); }
   .tabs::-webkit-scrollbar { display: none; }
-  .tab-btn { padding: 8px 12px; font-size: 12px; white-space: nowrap; flex-shrink: 0; }
+  .tab-btn { padding: 8px 11px; font-size: 12px; white-space: nowrap; flex-shrink: 0; }
 
-  /* cards: 2 colunas no mobile */
-  .cards { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-  .card { padding: 0.75rem 0.9rem; }
-  .card-value { font-size: 18px; }
-  .card-label { font-size: 10px; }
-  .card-sub   { font-size: 11px; }
-
-  /* barra de progresso mais fina */
-  .progress-wrap { height: 22px; }
-  .progress-medido, .progress-exec { font-size: 10px; padding-right: 5px; }
-
-  /* tabelas: scroll horizontal */
-  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  table { font-size: 12px; min-width: 480px; }
+  /* tabelas: scroll horizontal com min-width */
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius); }
+  table { font-size: 12px; width: 100%; min-width: 520px; }
   thead th { padding: 6px 8px; font-size: 10px; }
   tbody td  { padding: 6px 8px; }
-  tfoot td  { padding: 6px 8px; }
+  tfoot td  { padding: 6px 8px; font-size: 12px; }
+
+  /* ocultar colunas menos importantes em mobile */
+  .col-hide-mobile { display: none; }
 
   /* formulários: 1 coluna */
-  .form-grid { grid-template-columns: 1fr; }
-  .form-card { padding: 1rem; }
+  .form-grid { grid-template-columns: 1fr; gap: 8px; }
+  .form-card { padding: 0.85rem; }
+  .form-group label { font-size: 10px; }
+  input[type="date"], input[type="text"], input[type="number"], select, textarea {
+    font-size: 16px; /* evita zoom automático iOS */
+    padding: 9px 10px;
+  }
 
-  /* log compacto */
-  .log-entry { flex-wrap: wrap; gap: 4px; }
-  .log-date  { min-width: auto; width: 100%; }
-  .log-desc  { width: 100%; }
+  /* botões */
+  .btn    { padding: 8px 12px; font-size: 12px; }
+  .btn-sm { padding: 5px 9px;  font-size: 11px; }
 
-  /* alertas menores */
-  .alert { font-size: 12px; padding: 8px 12px; }
+  /* log */
+  .log-entry { flex-wrap: wrap; gap: 3px; padding: 8px 0; }
+  .log-date  { min-width: auto; width: 100%; font-size: 11px; }
+  .log-desc  { width: 100%; font-size: 12px; }
+  .log-pct, .log-val, .log-prev { font-size: 11px; }
 
-  /* sect-title menor */
-  .sect-title { font-size: 10px; margin: 1rem 0 0.5rem; }
+  /* alertas */
+  .alert { font-size: 12px; padding: 8px 10px; }
 
-  /* legenda em coluna */
-  .legend { flex-direction: column; gap: 6px; font-size: 11px; }
-
-  /* botões menores */
-  .btn { padding: 7px 12px; font-size: 12px; }
-  .btn-sm { padding: 4px 8px; font-size: 11px; }
-
-  /* login card sem padding excessivo */
-  .login-card { padding: 1.75rem 1.25rem; }
+  /* form-card botões lado a lado */
+  .btn-row { display: flex; flex-wrap: wrap; gap: 8px; }
 }
 
 @media (max-width: 400px) {
-  /* telas muito pequenas: 1 coluna de cards */
+  /* telas muito pequenas: cards 1 coluna */
   .cards { grid-template-columns: 1fr; }
   .card-value { font-size: 20px; }
+  table { min-width: 420px; }
+  .tab-btn { padding: 7px 9px; font-size: 11px; }
 }
 
 .resumo-table td, .resumo-table th { padding: 7px 10px; font-size: 13px; }
@@ -381,6 +398,10 @@ textarea { resize: vertical; min-height: 60px; }
       <div class="progress-medido" id="bar-medido" style="width:8.23%">8,23% ✓</div>
       <div class="progress-exec"   id="bar-exec"   style="left:8.23%;width:0;opacity:0.55"></div>
       <div class="progress-prev"   id="bar-prev"   style="left:8.23%;width:0"></div>
+    </div>
+    <div id="bar-pct-labels" style="display:flex;gap:12px;font-size:11px;margin:4px 0 0;flex-wrap:wrap;">
+      <span style="color:var(--green);font-weight:600" id="bar-label-med">✓ 8,23% confirmado</span>
+      <span style="color:var(--blue-mid);font-weight:600" id="bar-label-exec"></span>
     </div>
     <div class="legend">
       <span><div class="dot" style="background:var(--green-mid)"></div><strong>Confirmado CAIXA</strong> — 8,23% (1ª medição)</span>
@@ -1466,7 +1487,7 @@ textarea { resize: vertical; min-height: 60px; }
 
 <script>
 /* ══ VERSÃO ════════════════════════════════════════════════════ */
-const APP_VERSION = '1.28';
+const APP_VERSION = '1.29';
 const VERSOES = [
   { v:'1.0',  data:'19/06/2026', autor:'Claude', desc:'Criação do tracker — PCI, cronograma e histórico base' },
   { v:'1.1',  data:'19/06/2026', autor:'Claude', desc:'Adição do sistema de login (admin/visitante) com senha hash SHA-256' },
@@ -1497,6 +1518,7 @@ const VERSOES = [
   { v:'1.26', data:'22/06/2026', autor:'Claude', desc:'Visitante: R$ removido do card liberado e legenda · barra de previsão oculta · seção previsões rápidas oculta' },
   { v:'1.27', data:'22/06/2026', autor:'Claude', desc:'Visitante: R$ 30.623 removido do sub do card liberado CAIXA em todas as situações (inicial e ao confirmar medição)' },
   { v:'1.28', data:'22/06/2026', autor:'Claude', desc:'Layout responsivo completo: mobile ≤768px (2 col cards, tabs scroll, tabelas scroll, form 1 col, log compacto) · telas ≤400px (1 col)' },
+  { v:'1.29', data:'22/06/2026', autor:'Claude', desc:'Responsivo revisado: barra sem texto embutido no mobile · labels % abaixo da barra · inputs font-size 16px (evita zoom iOS) · cards e tabelas otimizados' },
 ];
 
 /* ══ CONFIG ══════════════════════════════════════════════════ */
@@ -1782,12 +1804,18 @@ function recalcular() {
   const e = Math.min(execNovoCaixa, 100 - m);
   const p = isAdmin ? Math.min(Math.max(0, prevCaixa - execNovoCaixa), 100 - m - e) : 0;
   document.getElementById('bar-medido').style.width = m + '%';
-  document.getElementById('bar-medido').textContent = m > 3 ? fmtP(m) + ' ✓' : '';
+  document.getElementById('bar-medido').textContent = m > 5 ? fmtP(m) + ' ✓' : '';
   document.getElementById('bar-exec').style.left    = m + '%';
   document.getElementById('bar-exec').style.width   = e + '%';
-  document.getElementById('bar-exec').textContent   = e > 2 ? '~' + fmtP(e) : '';
+  document.getElementById('bar-exec').textContent   = e > 4 ? '~' + fmtP(e) : '';
   document.getElementById('bar-prev').style.left    = (m+e) + '%';
   document.getElementById('bar-prev').style.width   = p + '%';
+
+  // labels abaixo da barra (sempre visíveis, inclusive mobile)
+  const lbMed  = document.getElementById('bar-label-med');
+  const lbExec = document.getElementById('bar-label-exec');
+  if (lbMed)  lbMed.textContent  = `✓ ${fmtP(m)} confirmado`;
+  if (lbExec) lbExec.textContent = e > 0 ? `~${fmtP(e)} executado (CAIXA)` : '';
 
   // previsões rápidas só para admin
   const prevEl = document.getElementById('previsoes-rapidas');
