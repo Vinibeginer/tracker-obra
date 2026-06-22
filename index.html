@@ -285,7 +285,7 @@ textarea { resize: vertical; min-height: 60px; }
       <div class="card ok">
         <div class="card-label">✓ Liberado CAIXA (confirmado)</div>
         <div class="card-value" id="c-medido">8,23%</div>
-        <div class="card-sub" id="c-medido-sub">R$ 30.623 · 1ª med. 30/05/2026</div>
+        <div class="card-sub" id="c-medido-sub">1ª med. 30/05/2026</div>
       </div>
       <div class="card info">
         <div class="card-label">Executado físico (% PCI)</div>
@@ -1400,7 +1400,7 @@ textarea { resize: vertical; min-height: 60px; }
 
 <script>
 /* ══ VERSÃO ════════════════════════════════════════════════════ */
-const APP_VERSION = '1.24';
+const APP_VERSION = '1.25';
 const VERSOES = [
   { v:'1.0',  data:'19/06/2026', autor:'Claude', desc:'Criação do tracker — PCI, cronograma e histórico base' },
   { v:'1.1',  data:'19/06/2026', autor:'Claude', desc:'Adição do sistema de login (admin/visitante) com senha hash SHA-256' },
@@ -1427,6 +1427,7 @@ const VERSOES = [
   { v:'1.22', data:'22/06/2026', autor:'Claude', desc:'Correção: esgoto 1ºpav removido (sem laje) · 2ª medição corrigida para 3,31% CAIXA ~R$12.340 · histórico limpo · cronograma ajustado' },
   { v:'1.23', data:'22/06/2026', autor:'Claude', desc:'Cards clarificados: "Executado físico (% PCI)" separado de "Estimativa próx. medição (% CAIXA)" · sub mostra relação ×0,7533 explicitamente' },
   { v:'1.24', data:'22/06/2026', autor:'Claude', desc:'Card "Com previsões" removido — informação ambígua · barra e legenda simplificadas' },
+  { v:'1.25', data:'22/06/2026', autor:'Claude', desc:'Perfil visitante: sem R$ em nenhum lugar · cards mostram só % · sub do card executado mostra % CAIXA estimado · sub medição mostra fórmula' },
 ];
 
 /* ══ CONFIG ══════════════════════════════════════════════════ */
@@ -1688,15 +1689,16 @@ function recalcular() {
   document.getElementById('c-exec').textContent     = fmtP(execNovo);
   document.getElementById('c-exec-sub').textContent = isAdmin
     ? `~${fmt(execVal)} · → ${fmtP(execNovoCaixa)} CAIXA (×0,7533)`
-    : 'peso PCI — % CAIXA no card ao lado';
+    : `→ ${fmtP(execNovoCaixa)} CAIXA estimado (×0,7533)`;
 
   document.getElementById('c-novo').textContent    = '~' + fmtP(execNovoCaixa);
   document.getElementById('c-novo-sub').innerHTML  = isAdmin
     ? `~${fmt(novoVal)} · % PCI × 0,7533 · só executados`
-    : '<span class="lock-note">🔒 restrito</span>';
+    : '% PCI × 0,7533 · só itens executados';
 
   if (isAdmin) {
     const saldoConfirmado = BASE_OBRA - MED_VAL;
+    document.getElementById('c-medido-sub').textContent = `R$ 30.623 · 1ª med. 30/05/2026`;
     document.getElementById('c-saldo').textContent         = fmt(saldoConfirmado);
     document.getElementById('c-total-lib').textContent     = fmt(MED_VAL);
     document.getElementById('c-total-lib-sub').textContent = fmtP(MED_VAL/BASE_OBRA*100) + '% confirmado · ' + fmt(saldoConfirmado) + ' a liberar';
