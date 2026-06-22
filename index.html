@@ -449,39 +449,39 @@ textarea { resize: vertical; min-height: 60px; }
         <div class="card ok">
           <div class="card-label">Início (alvenaria)</div>
           <div class="card-value" style="font-size:16px;">22/06/2026</div>
-          <div class="card-sub">semana atual — Barros Rezende</div>
+          <div class="card-sub">Barros Rezende — térreo</div>
         </div>
         <div class="card info">
-          <div class="card-label">Conclusão estimada</div>
-          <div class="card-value" style="font-size:16px;">24/05/2027</div>
-          <div class="card-sub">~11 meses · prazo BR</div>
-        </div>
-        <div class="card ok">
-          <div class="card-label">Economia de encargos</div>
-          <div class="card-value">R$ 49.700</div>
-          <div class="card-sub">9 meses antecipados × R$ 5.522</div>
+          <div class="card-label">Térreo — conclusão BR</div>
+          <div class="card-value" style="font-size:16px;">~30/03/2027</div>
+          <div class="card-sub">~9 meses · contrato firmado</div>
         </div>
         <div class="card warn">
-          <div class="card-label">Medições previstas</div>
-          <div class="card-value">7 medições</div>
-          <div class="card-sub">1 realizada · 6 a realizar</div>
+          <div class="card-label">1º e 2º pav.</div>
+          <div class="card-value" style="font-size:15px;">A contratar</div>
+          <div class="card-sub">MO e prazo a definir</div>
         </div>
         <div class="card">
-          <div class="card-label">Total a liberar CAIXA</div>
-          <div class="card-value">R$ 372.888</div>
-          <div class="card-sub">em 7 medições</div>
+          <div class="card-label">Prazo CAIXA</div>
+          <div class="card-value" style="font-size:16px;">fev/2028</div>
+          <div class="card-sub">21 meses — margem confortável</div>
         </div>
         <div class="card">
-          <div class="card-label">Equipe</div>
+          <div class="card-label">Medições térreo</div>
+          <div class="card-value">4 medições</div>
+          <div class="card-sub">1 realizada · 3 a realizar</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Equipe BR</div>
           <div class="card-value" style="font-size:15px;">2 pedreiros</div>
           <div class="card-sub">+ ajudantes · 5 dias/sem</div>
         </div>
       </div>
 
       <!-- linha do tempo das medições -->
-      <div class="sect-title">Calendário de medições CAIXA — escala 75,33% (CAIXA/obra)</div>
-      <div class="alert alert-info" style="margin-bottom:0.75rem;">
-        O financiamento CAIXA representa <strong>75,33% do custo da obra</strong>. Cada % medido pela CAIXA equivale a <strong>% PCI × 0,7533</strong>. Datas baseadas no cronograma da <strong>Barros Rezende Construtora</strong> (05/06/2025). Os recursos próprios entram nas fases finais (previsão: 13º + PLR dez/2026). O FGTS foi utilizado na quitação do terreno e <strong>não está disponível para a obra</strong>.
+      <div class="sect-title">Calendário de medições CAIXA — térreo (contratado BR) + pavimentos (a contratar)</div>
+      <div class="alert alert-warn" style="margin-bottom:0.75rem;">
+        ⚠️ O orçamento da Barros Rezende (R$ 115.000) cobre <strong>somente o térreo completo</strong>. As medições 1ª a 4ª refletem os prazos reais do contrato BR. As medições 5ª em diante dependem de <strong>novo contrato de MO para 1º e 2º pavimento</strong> — datas e valores a definir.
       </div>
       <div class="table-wrap" style="margin-bottom:1.5rem;">
         <table>
@@ -499,10 +499,12 @@ textarea { resize: vertical; min-height: 60px; }
             </tr>
           </thead>
           <tbody>
+            <!-- TÉRREO — contratado BR -->
+            <tr><td colspan="9" style="background:var(--green-bg);font-size:11px;font-weight:600;color:var(--green);padding:5px 10px;text-transform:uppercase;letter-spacing:0.05em;">Térreo — Contrato Barros Rezende (prazos confirmados)</td></tr>
             <tr style="background:var(--green-bg)">
               <td class="center"><span class="badge b-medido">1ª ✓</span></td>
               <td style="font-size:12px;white-space:nowrap">30/05/2026</td>
-              <td style="font-size:12px;color:var(--text2)">Barracão + infraestrutura + impermeabilização</td>
+              <td style="font-size:12px;color:var(--text2)">Barracão + fundação + impermeabilização alicerce</td>
               <td class="right">10,71%</td>
               <td class="right" style="font-weight:600;color:var(--green)">8,23%</td>
               <td class="right" style="font-weight:600;color:var(--green)">R$ 30.623</td>
@@ -513,94 +515,96 @@ textarea { resize: vertical; min-height: 60px; }
             <tr style="background:var(--blue-bg)">
               <td class="center"><span class="badge b-concluido">2ª</span></td>
               <td style="font-size:12px;white-space:nowrap">~07/09/2026</td>
-              <td style="font-size:12px;color:var(--text2)">Esgoto+hidráulica térreo + infra elétrica + magro + alvenaria/pilares/vigas início</td>
-              <td class="right">18,86%</td>
-              <td class="right" style="font-weight:600;color:var(--blue)">14,21%</td>
-              <td class="right" style="font-weight:600;color:var(--blue)">~R$ 52.969</td>
-              <td class="right">R$ 83.592</td>
-              <td class="right">R$ 289.296</td>
+              <td style="font-size:12px;color:var(--text2)">Alvenaria+pilares+vigas (45d) + laje térreo (10d) + esgoto+hidráulica (10d) + infra elétrica (5d)</td>
+              <td class="right">19,35%</td>
+              <td class="right" style="font-weight:600;color:var(--blue)">14,57%</td>
+              <td class="right" style="font-weight:600;color:var(--blue)">~R$ 54.304</td>
+              <td class="right">R$ 84.927</td>
+              <td class="right">R$ 287.961</td>
               <td><span class="badge b-concluido">CAIXA</span></td>
             </tr>
             <tr>
               <td class="center"><span class="badge b-pendente">3ª</span></td>
-              <td style="font-size:12px;white-space:nowrap">~02/11/2026</td>
-              <td style="font-size:12px;color:var(--text2)">Alvenaria+pilares 1ºpav + laje 1ºpav + alvenaria/laje 2ºpav</td>
-              <td class="right">11,56%</td>
-              <td class="right">8,71%</td>
-              <td class="right" style="font-weight:600">~R$ 32.465</td>
-              <td class="right">R$ 116.057</td>
-              <td class="right">R$ 256.831</td>
+              <td style="font-size:12px;white-space:nowrap">~26/10/2026</td>
+              <td style="font-size:12px;color:var(--text2)">Engradamento + cobertura + impermeab. 2ºpav + esquadrias térreo + vidros</td>
+              <td class="right">9,43%</td>
+              <td class="right">7,10%</td>
+              <td class="right" style="font-weight:600">~R$ 26.468</td>
+              <td class="right">R$ 111.395</td>
+              <td class="right">R$ 261.493</td>
               <td><span class="badge b-concluido">CAIXA</span></td>
             </tr>
             <tr>
               <td class="center"><span class="badge b-pendente">4ª</span></td>
-              <td style="font-size:12px;white-space:nowrap">~07/12/2026</td>
-              <td style="font-size:12px;color:var(--text2)">Engradamento + cobertura + impermeab. 2ºpav + esquadrias + vidros</td>
-              <td class="right">9,43%</td>
-              <td class="right">7,10%</td>
-              <td class="right" style="font-weight:600">~R$ 26.468</td>
-              <td class="right">R$ 142.525</td>
-              <td class="right">R$ 230.363</td>
-              <td><span class="badge b-concluido">CAIXA</span></td>
-            </tr>
-            <tr>
-              <td class="center"><span class="badge b-pendente">5ª</span></td>
-              <td style="font-size:12px;white-space:nowrap">~15/03/2027</td>
-              <td style="font-size:12px;color:var(--text2)">Chapisco + reboco 505m² + revestimento 80,90m²</td>
-              <td class="right">16,35%</td>
-              <td class="right">12,31%</td>
-              <td class="right" style="font-weight:600">~R$ 45.885</td>
-              <td class="right">R$ 188.410</td>
-              <td class="right">R$ 184.478</td>
+              <td style="font-size:12px;white-space:nowrap">~30/03/2027</td>
+              <td style="font-size:12px;color:var(--text2)">Chapisco+reboco térreo (50d) + revestimento (20d) + contrapiso + piso + soleiras + bancadas + varanda</td>
+              <td class="right">33,22%</td>
+              <td class="right">25,02%</td>
+              <td class="right" style="font-weight:600">~R$ 93.240</td>
+              <td class="right">R$ 204.635</td>
+              <td class="right">R$ 168.253</td>
               <td><span class="badge b-parcial">CAIXA+Prop</span></td>
             </tr>
-            <tr>
-              <td class="center"><span class="badge b-pendente">6ª</span></td>
-              <td style="font-size:12px;white-space:nowrap">~26/04/2027</td>
-              <td style="font-size:12px;color:var(--text2)">Contrapiso + piso 80m² + rodapé</td>
-              <td class="right">14,85%</td>
-              <td class="right">11,19%</td>
-              <td class="right" style="font-weight:600">~R$ 41.691</td>
-              <td class="right">R$ 230.101</td>
-              <td class="right">R$ 142.787</td>
-              <td><span class="badge b-adiant">Rec. próprios</span></td>
+
+            <!-- PAVIMENTOS — a contratar -->
+            <tr><td colspan="9" style="background:var(--amber-bg);font-size:11px;font-weight:600;color:var(--amber);padding:5px 10px;text-transform:uppercase;letter-spacing:0.05em;">1º e 2º Pavimento — MO a contratar (datas e valores a definir)</td></tr>
+            <tr style="opacity:0.55">
+              <td class="center"><span class="badge b-pendente">5ª</span></td>
+              <td style="font-size:12px;white-space:nowrap;color:var(--text3)">A definir</td>
+              <td style="font-size:12px;color:var(--text3)">Alvenaria + pilares + vigas + lajes 1º e 2º pav — <em>depende de novo contrato MO</em></td>
+              <td class="right" style="color:var(--text3)">~17,56%</td>
+              <td class="right" style="color:var(--text3)">~13,23%</td>
+              <td class="right" style="color:var(--text3)">~R$ 49.320</td>
+              <td class="right" style="color:var(--text3)">—</td>
+              <td class="right" style="color:var(--text3)">—</td>
+              <td><span class="badge b-pendente">A contratar</span></td>
             </tr>
-            <tr>
+            <tr style="opacity:0.55">
+              <td class="center"><span class="badge b-pendente">6ª</span></td>
+              <td style="font-size:12px;white-space:nowrap;color:var(--text3)">A definir</td>
+              <td style="font-size:12px;color:var(--text3)">Esquadrias + instalações + chapisco + reboco 1º/2º pav — <em>a contratar</em></td>
+              <td class="right" style="color:var(--text3)">~14,28%</td>
+              <td class="right" style="color:var(--text3)">~10,76%</td>
+              <td class="right" style="color:var(--text3)">~R$ 40.107</td>
+              <td class="right" style="color:var(--text3)">—</td>
+              <td class="right" style="color:var(--text3)">—</td>
+              <td><span class="badge b-pendente">A contratar</span></td>
+            </tr>
+            <tr style="opacity:0.55">
               <td class="center"><span class="badge b-pendente">7ª</span></td>
-              <td style="font-size:12px;white-space:nowrap">~17/05/2027</td>
-              <td style="font-size:12px;color:var(--text2)">Soleiras + bancadas + varanda + louças + complementos</td>
-              <td class="right">9,24%</td>
-              <td class="right">6,96%</td>
-              <td class="right" style="font-weight:600">~R$ 25.940</td>
-              <td class="right">R$ 256.041</td>
-              <td class="right">R$ 116.847</td>
-              <td><span class="badge b-adiant">Rec. próprios</span></td>
+              <td style="font-size:12px;white-space:nowrap;color:var(--text3)">A definir</td>
+              <td style="font-size:12px;color:var(--text3)">Pisos + revestimentos + pinturas + louças + acabamentos 1º/2º pav — <em>a contratar</em></td>
+              <td class="right" style="color:var(--text3)">~19,93%</td>
+              <td class="right" style="color:var(--text3)">~15,01%</td>
+              <td class="right" style="color:var(--text3)">~R$ 55.960</td>
+              <td class="right" style="color:var(--text3)">—</td>
+              <td class="right" style="color:var(--text3)">—</td>
+              <td><span class="badge b-pendente">A contratar</span></td>
             </tr>
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="5" style="font-weight:600">Total desembolsado pelas 7 medições</td>
-              <td class="right" style="font-weight:600;color:var(--blue)">R$ 256.041</td>
-              <td colspan="2" style="font-size:12px;color:var(--text2)">+ R$ 116.847 bloqueado até habite-se</td>
-              <td></td>
+              <td colspan="5" style="font-weight:600">Total CAIXA — térreo (confirmado BR)</td>
+              <td class="right" style="font-weight:600;color:var(--green)">~R$ 204.635</td>
+              <td colspan="3" style="font-size:12px;color:var(--text2)">4 medições · saldo R$ 168.253 para pavimentos</td>
             </tr>
             <tr>
               <td colspan="5" style="font-weight:600;color:var(--amber)">Parcela final bloqueada (habite-se + CND + averbação)</td>
               <td class="right" style="font-weight:600;color:var(--amber)">~R$ 18.644</td>
-              <td colspan="3" style="font-size:12px;color:var(--text2)">mín. 5% do financiamento</td>
+              <td colspan="3" style="font-size:12px;color:var(--text2)">mín. 5% · liberada só após conclusão total</td>
             </tr>
           </tfoot>
         </table>
       </div>
 
-      <!-- cronograma detalhado por etapa -->
-      <div class="sect-title">Cronograma detalhado por etapa — Barros Rezende</div>
+      <!-- cronograma detalhado térreo -->
+      <div class="sect-title">Cronograma detalhado — Térreo (Barros Rezende)</div>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
               <th>#BR</th>
-              <th>Etapa (Barros Rezende)</th>
+              <th>Etapa</th>
               <th class="center">Prazo BR</th>
               <th>Início</th>
               <th>Término</th>
@@ -610,8 +614,7 @@ textarea { resize: vertical; min-height: 60px; }
             </tr>
           </thead>
           <tbody>
-            <!-- FASE 1 — concluída -->
-            <tr><td colspan="8" style="background:var(--surface2);font-size:11px;font-weight:600;color:var(--text2);padding:6px 10px;text-transform:uppercase;letter-spacing:0.05em;">Fase 1 — Fundação e infra ✓ Concluída (1ª medição CAIXA)</td></tr>
+            <tr><td colspan="8" style="background:var(--surface2);font-size:11px;font-weight:600;color:var(--text2);padding:6px 10px;text-transform:uppercase;letter-spacing:0.05em;">Fase 1 — Fundação ✓ Concluída</td></tr>
             <tr style="opacity:0.65">
               <td>BR1</td><td>Serviços preliminares — locação gabarito</td><td class="center">3 dias</td><td>Concluído</td><td>—</td><td class="right">3,64%</td><td><span class="badge b-medido">CAIXA ✓</span></td><td class="center"><span class="badge b-medido">1ª</span></td>
             </tr>
@@ -622,89 +625,77 @@ textarea { resize: vertical; min-height: 60px; }
               <td>BR3</td><td>Impermeabilização do alicerce</td><td class="center">3 dias</td><td>Concluído</td><td>—</td><td class="right">2,57%</td><td><span class="badge b-medido">CAIXA ✓</span></td><td class="center"><span class="badge b-medido">1ª</span></td>
             </tr>
 
-            <!-- FASE 2 — em andamento -->
-            <tr><td colspan="8" style="background:var(--blue-bg);font-size:11px;font-weight:600;color:var(--blue);padding:6px 10px;text-transform:uppercase;letter-spacing:0.05em;">Fase 2 — Estrutura principal → 2ª medição (~07/09/2026)</td></tr>
+            <tr><td colspan="8" style="background:var(--blue-bg);font-size:11px;font-weight:600;color:var(--blue);padding:6px 10px;text-transform:uppercase;letter-spacing:0.05em;">Fase 2 — Estrutura térreo → 2ª medição (~07/09/2026)</td></tr>
             <tr style="background:var(--green-bg)">
-              <td>—</td><td>Esgoto térreo 100% ✓ + Concreto magro ✓ + Padrão elétrico ✓</td><td class="center">—</td><td>Concluído</td><td>—</td><td class="right">4,39%</td><td><span class="badge b-medido">Executado</span></td><td class="center"><span class="badge b-concluido">2ª</span></td>
+              <td>—</td><td>Esgoto térreo ✓ + Concreto magro ✓ + Padrão elétrico ✓</td><td class="center">—</td><td>Concluído</td><td>—</td><td class="right">4,39%</td><td><span class="badge b-medido">Executado</span></td><td class="center"><span class="badge b-concluido">2ª</span></td>
             </tr>
             <tr style="background:var(--amber-bg)">
               <td>BR4+5</td><td>Alvenaria 252,81m² + pilares + vigas superiores</td><td class="center">45 dias</td><td>22/06/2026</td><td>03/08/2026</td><td class="right">8,14%</td><td><span class="badge b-concluido">CAIXA</span></td><td class="center"><span class="badge b-concluido">2ª</span></td>
             </tr>
             <tr>
-              <td>BR6</td><td>Laje 90,94m²</td><td class="center">10 dias</td><td>03/08/2026</td><td>17/08/2026</td><td class="right">4,71%</td><td><span class="badge b-concluido">CAIXA</span></td><td class="center"><span class="badge b-concluido">2ª</span></td>
+              <td>BR6</td><td>Laje térreo 90,94m²</td><td class="center">10 dias</td><td>03/08/2026</td><td>17/08/2026</td><td class="right">4,71%</td><td><span class="badge b-concluido">CAIXA</span></td><td class="center"><span class="badge b-concluido">2ª</span></td>
             </tr>
             <tr>
-              <td>BR7</td><td>Esgoto 1ºpav + hidráulica cozinha/lavabo/suíte térreo</td><td class="center">10 dias</td><td>17/08/2026</td><td>31/08/2026</td><td class="right">4,07%</td><td><span class="badge b-concluido">CAIXA</span></td><td class="center"><span class="badge b-concluido">2ª</span></td>
+              <td>BR7</td><td>Esgoto + hidráulica cozinha/lavabo/suíte térreo</td><td class="center">10 dias</td><td>17/08/2026</td><td>31/08/2026</td><td class="right">4,07%</td><td><span class="badge b-concluido">CAIXA</span></td><td class="center"><span class="badge b-concluido">2ª</span></td>
             </tr>
             <tr>
-              <td>BR8</td><td>Infra elétrica — caixas de luz + quadro distribuição</td><td class="center">5 dias</td><td>31/08/2026</td><td>07/09/2026</td><td class="right">2,07%</td><td><span class="badge b-concluido">CAIXA</span></td><td class="center"><span class="badge b-concluido">2ª</span></td>
-            </tr>
-
-            <!-- FASE 3 -->
-            <tr><td colspan="8" style="background:var(--surface2);font-size:11px;font-weight:600;color:var(--text2);padding:6px 10px;text-transform:uppercase;letter-spacing:0.05em;">Fase 3 — Estrutura 1º e 2º pavimento → 3ª medição (~02/11/2026)</td></tr>
-            <tr>
-              <td>BR4.1</td><td>Alvenaria + pilares + vigas 1º pavimento</td><td class="center">3 sem</td><td>07/09/2026</td><td>28/09/2026</td><td class="right">5,78%</td><td><span class="badge b-concluido">CAIXA</span></td><td class="center"><span class="badge b-pendente">3ª</span></td>
-            </tr>
-            <tr>
-              <td>BR6.1</td><td>Laje 1º pavimento</td><td class="center">2 sem</td><td>28/09/2026</td><td>12/10/2026</td><td class="right">3,00%</td><td><span class="badge b-concluido">CAIXA</span></td><td class="center"><span class="badge b-pendente">3ª</span></td>
-            </tr>
-            <tr>
-              <td>BR4.2</td><td>Alvenaria + pilares + laje 2º pavimento</td><td class="center">3 sem</td><td>12/10/2026</td><td>02/11/2026</td><td class="right">2,78%</td><td><span class="badge b-concluido">CAIXA</span></td><td class="center"><span class="badge b-pendente">3ª</span></td>
+              <td>BR8</td><td>Infra elétrica — caixas + quadro distribuição</td><td class="center">5 dias</td><td>31/08/2026</td><td>07/09/2026</td><td class="right">2,07%</td><td><span class="badge b-concluido">CAIXA</span></td><td class="center"><span class="badge b-concluido">2ª</span></td>
             </tr>
 
-            <!-- FASE 4 -->
-            <tr><td colspan="8" style="background:var(--surface2);font-size:11px;font-weight:600;color:var(--text2);padding:6px 10px;text-transform:uppercase;letter-spacing:0.05em;">Fase 4 — Cobertura e fechamentos → 4ª medição (~07/12/2026)</td></tr>
+            <tr><td colspan="8" style="background:var(--surface2);font-size:11px;font-weight:600;color:var(--text2);padding:6px 10px;text-transform:uppercase;letter-spacing:0.05em;">Fase 3 — Cobertura + esquadrias → 3ª medição (~26/10/2026)</td></tr>
             <tr>
-              <td>BR9</td><td>Engradamento + instalação caixonetes</td><td class="center">3 dias</td><td>02/11/2026</td><td>09/11/2026</td><td class="right">1,07%</td><td><span class="badge b-concluido">CAIXA</span></td><td class="center"><span class="badge b-pendente">4ª</span></td>
+              <td>BR9</td><td>Engradamento + instalação caixonetes</td><td class="center">3 dias</td><td>07/09/2026</td><td>12/09/2026</td><td class="right">1,07%</td><td><span class="badge b-concluido">CAIXA</span></td><td class="center"><span class="badge b-pendente">3ª</span></td>
             </tr>
             <tr>
-              <td>—</td><td>Cobertura — telhas fibrocimento + platibanda</td><td class="center">2 sem</td><td>09/11/2026</td><td>23/11/2026</td><td class="right">2,57%</td><td><span class="badge b-concluido">CAIXA</span></td><td class="center"><span class="badge b-pendente">4ª</span></td>
+              <td>—</td><td>Cobertura — telhas fibrocimento + platibanda</td><td class="center">2 sem</td><td>12/09/2026</td><td>26/09/2026</td><td class="right">2,57%</td><td><span class="badge b-concluido">CAIXA</span></td><td class="center"><span class="badge b-pendente">3ª</span></td>
             </tr>
             <tr>
-              <td>—</td><td>Impermeabilização laje 2ºpav + varanda</td><td class="center">1 sem</td><td>23/11/2026</td><td>30/11/2026</td><td class="right">1,03%</td><td><span class="badge b-concluido">CAIXA</span></td><td class="center"><span class="badge b-pendente">4ª</span></td>
+              <td>—</td><td>Impermeabilização laje 2ºpav + varanda</td><td class="center">1 sem</td><td>26/09/2026</td><td>03/10/2026</td><td class="right">1,03%</td><td><span class="badge b-concluido">CAIXA</span></td><td class="center"><span class="badge b-pendente">3ª</span></td>
             </tr>
             <tr>
-              <td>BR10</td><td>Janelas, básculas e portas (22+18 unid.)</td><td class="center">10 dias</td><td>30/11/2026</td><td>14/12/2026</td><td class="right">4,71%</td><td><span class="badge b-concluido">CAIXA</span></td><td class="center"><span class="badge b-pendente">4ª</span></td>
-            </tr>
-
-            <!-- FASE 5 -->
-            <tr><td colspan="8" style="background:var(--surface2);font-size:11px;font-weight:600;color:var(--text2);padding:6px 10px;text-transform:uppercase;letter-spacing:0.05em;">Fase 5 — Revestimentos → 5ª medição (~15/03/2027)</td></tr>
-            <tr>
-              <td>BR11</td><td>Chapisco + reboco 505,62m²</td><td class="center">50 dias</td><td>14/12/2026</td><td>01/03/2027</td><td class="right">8,14%</td><td><span class="badge b-parcial">CAIXA+Prop</span></td><td class="center"><span class="badge b-pendente">5ª</span></td>
+              <td>BR10</td><td>Janelas + básculas + portas térreo</td><td class="center">10 dias</td><td>03/10/2026</td><td>17/10/2026</td><td class="right">4,71%</td><td><span class="badge b-concluido">CAIXA</span></td><td class="center"><span class="badge b-pendente">3ª</span></td>
             </tr>
             <tr>
-              <td>BR14</td><td>Revestimento cerâmico 80,90m²</td><td class="center">20 dias</td><td>01/03/2027</td><td>29/03/2027</td><td class="right">8,14%</td><td><span class="badge b-parcial">CAIXA+Prop</span></td><td class="center"><span class="badge b-pendente">5ª</span></td>
+              <td>—</td><td>Vidros + guarda-corpos térreo</td><td class="center">1 sem</td><td>17/10/2026</td><td>24/10/2026</td><td class="right">1,07%</td><td><span class="badge b-concluido">CAIXA</span></td><td class="center"><span class="badge b-pendente">3ª</span></td>
             </tr>
 
-            <!-- FASE 6 -->
-            <tr><td colspan="8" style="background:var(--amber-bg);font-size:11px;font-weight:600;color:var(--amber);padding:6px 10px;text-transform:uppercase;letter-spacing:0.05em;">Fase 6 — Pisos e acabamentos → 6ª e 7ª medição (Recursos próprios)</td></tr>
+            <tr><td colspan="8" style="background:var(--amber-bg);font-size:11px;font-weight:600;color:var(--amber);padding:6px 10px;text-transform:uppercase;letter-spacing:0.05em;">Fase 4 — Revestimentos + acabamentos térreo → 4ª medição (~30/03/2027)</td></tr>
             <tr>
-              <td>BR12</td><td>Contrapiso + massa de regularização</td><td class="center">15 dias</td><td>29/03/2027</td><td>19/04/2027</td><td class="right">1,28%</td><td><span class="badge b-adiant">Rec. próprios</span></td><td class="center"><span class="badge b-pendente">6ª</span></td>
+              <td>BR11</td><td>Chapisco + reboco térreo 505,62m²</td><td class="center">50 dias</td><td>26/10/2026</td><td>15/01/2027</td><td class="right">8,14%</td><td><span class="badge b-parcial">CAIXA+Prop</span></td><td class="center"><span class="badge b-pendente">4ª</span></td>
             </tr>
             <tr>
-              <td>BR13</td><td>Piso 80,14m² + rodapé 6m²</td><td class="center">15 dias</td><td>19/04/2027</td><td>10/05/2027</td><td class="right">10,28%</td><td><span class="badge b-adiant">Rec. próprios</span></td><td class="center"><span class="badge b-pendente">6ª</span></td>
+              <td>BR14</td><td>Revestimento cerâmico 80,90m²</td><td class="center">20 dias</td><td>15/01/2027</td><td>12/02/2027</td><td class="right">8,14%</td><td><span class="badge b-parcial">CAIXA+Prop</span></td><td class="center"><span class="badge b-pendente">4ª</span></td>
             </tr>
             <tr>
-              <td>BR17</td><td>Concretagem + contrapiso varanda</td><td class="center">2 dias</td><td>10/05/2027</td><td>12/05/2027</td><td class="right">3,29%</td><td><span class="badge b-adiant">Rec. próprios</span></td><td class="center"><span class="badge b-pendente">6ª</span></td>
+              <td>BR12</td><td>Contrapiso + massa de regularização</td><td class="center">15 dias</td><td>12/02/2027</td><td>02/03/2027</td><td class="right">1,28%</td><td><span class="badge b-adiant">Rec. próprios</span></td><td class="center"><span class="badge b-pendente">4ª</span></td>
             </tr>
             <tr>
-              <td>BR15</td><td>Soleiras</td><td class="center">3 dias</td><td>12/05/2027</td><td>15/05/2027</td><td class="right">1,28%</td><td><span class="badge b-adiant">Rec. próprios</span></td><td class="center"><span class="badge b-pendente">7ª</span></td>
+              <td>BR13</td><td>Piso 80,14m² + rodapé 6m²</td><td class="center">15 dias</td><td>02/03/2027</td><td>22/03/2027</td><td class="right">10,28%</td><td><span class="badge b-adiant">Rec. próprios</span></td><td class="center"><span class="badge b-pendente">4ª</span></td>
             </tr>
             <tr>
-              <td>BR16</td><td>Bancadas (cozinha + lavabo + suíte)</td><td class="center">2 dias</td><td>15/05/2027</td><td>17/05/2027</td><td class="right">1,28%</td><td><span class="badge b-adiant">Rec. próprios</span></td><td class="center"><span class="badge b-pendente">7ª</span></td>
+              <td>BR17</td><td>Concretagem + contrapiso varanda térreo</td><td class="center">2 dias</td><td>22/03/2027</td><td>24/03/2027</td><td class="right">3,29%</td><td><span class="badge b-adiant">Rec. próprios</span></td><td class="center"><span class="badge b-pendente">4ª</span></td>
             </tr>
             <tr>
-              <td>—</td><td>Louças + metais + complementos + limpeza</td><td class="center">1 sem</td><td>17/05/2027</td><td>24/05/2027</td><td class="right">6,21%</td><td><span class="badge b-adiant">Rec. próprios</span></td><td class="center"><span class="badge b-pendente">7ª</span></td>
+              <td>BR15</td><td>Soleiras térreo</td><td class="center">3 dias</td><td>24/03/2027</td><td>27/03/2027</td><td class="right">1,28%</td><td><span class="badge b-adiant">Rec. próprios</span></td><td class="center"><span class="badge b-pendente">4ª</span></td>
+            </tr>
+            <tr>
+              <td>BR16</td><td>Bancadas cozinha + lavabo + suíte</td><td class="center">2 dias</td><td>27/03/2027</td><td>30/03/2027</td><td class="right">1,28%</td><td><span class="badge b-adiant">Rec. próprios</span></td><td class="center"><span class="badge b-pendente">4ª</span></td>
+            </tr>
+
+            <!-- PAVIMENTOS -->
+            <tr><td colspan="8" style="background:var(--amber-bg);font-size:11px;font-weight:600;color:var(--amber);padding:6px 10px;text-transform:uppercase;letter-spacing:0.05em;">1º e 2º Pavimento — MO a contratar · datas a definir</td></tr>
+            <tr style="opacity:0.45">
+              <td>—</td><td colspan="6" style="color:var(--text3);font-style:italic">Alvenaria + pilares + lajes + esquadrias + instalações + revestimentos + acabamentos 1º e 2º pav — aguardando contratação de MO</td><td class="center"><span class="badge b-pendente">5ª–7ª</span></td>
             </tr>
           </tbody>
         </table>
       </div>
 
       <div class="alert alert-ok" style="margin-top:1rem;">
-        ✅ Seguindo os prazos da Barros Rezende, a obra pode ser concluída em <strong>~maio/2027 (~11 meses)</strong>, 9 meses antes do prazo contratual (fev/2028). Economia estimada: <strong>~R$ 49.700</strong> em encargos mensais (9 × R$ 5.522).
+        ✅ Térreo (contrato BR): conclusão estimada <strong>~30/03/2027</strong> (~9 meses). Prazo contratual CAIXA: fev/2028. Margem confortável para contratar o 1º e 2º pavimento após conclusão do térreo.
       </div>
       <div class="alert alert-warn" style="margin-top:0.5rem;">
-        ⚠️ A partir da 5ª medição (mar/2027), os recursos próprios precisam estar disponíveis para complementar as liberações da CAIXA. Planejar o aporte com base no 13º + PLR de dez/2026.
+        ⚠️ 1º e 2º pavimento dependem de <strong>novo contrato de MO</strong> a ser firmado. Recomendado iniciar orçamentação com construtoras assim que o térreo estiver em fase de revestimento (~jan/2027), para não perder o prazo contratual CAIXA (fev/2028).
       </div>
       <div class="alert alert-info" style="margin-top:0.5rem;">
         💡 Alinhar cada medição com o RT <strong>30 dias antes</strong> da data prevista. PLS com fotos de cada item deve estar pronta e assinada pelo RT antes da vistoria CAIXA.
@@ -1447,7 +1438,7 @@ textarea { resize: vertical; min-height: 60px; }
 
 <script>
 /* ══ VERSÃO ════════════════════════════════════════════════════ */
-const APP_VERSION = '1.30';
+const APP_VERSION = '1.31';
 const VERSOES = [
   { v:'1.0',  data:'19/06/2026', autor:'Claude', desc:'Criação do tracker — PCI, cronograma e histórico base' },
   { v:'1.1',  data:'19/06/2026', autor:'Claude', desc:'Adição do sistema de login (admin/visitante) com senha hash SHA-256' },
@@ -1480,6 +1471,7 @@ const VERSOES = [
   { v:'1.28', data:'22/06/2026', autor:'Claude', desc:'Layout responsivo completo: mobile ≤768px (2 col cards, tabs scroll, tabelas scroll, form 1 col, log compacto) · telas ≤400px (1 col)' },
   { v:'1.29', data:'22/06/2026', autor:'Claude', desc:'Responsivo revisado: barra sem texto embutido no mobile · labels % abaixo da barra · inputs font-size 16px (evita zoom iOS) · cards e tabelas otimizados' },
   { v:'1.30', data:'22/06/2026', autor:'Claude', desc:'Cronograma refeito com prazos Barros Rezende: 7 medições, conclusão mai/2027 (~11 meses), laje separada, chapisco 50 dias, revestimento 20 dias, varanda incluída' },
+  { v:'1.31', data:'22/06/2026', autor:'Claude', desc:'Cronograma corrigido: térreo BR (4 medições, conclusão ~30/03/2027) separado de 1º+2º pav (a contratar, datas a definir) · sem otimismo indevido' },
 ];
 
 /* ══ CONFIG ══════════════════════════════════════════════════ */
