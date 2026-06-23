@@ -238,11 +238,195 @@ document.getElementById('btn-clear').addEventListener('click',()=>{if(confirm('L
 document.getElementById('btn-export').addEventListener('click',()=>{
   const data=cv.toDataURL('image/png');const lbl=FLOORS[floor].label;
   const w=window.open('','_blank');
-  w.document.write(`<!DOCTYPE html><html><head><title>Projeto Elétrico – ${lbl}</title><style>@page{size:A1 landscape;margin:0}body{margin:0;font-family:Arial,sans-serif}.hdr{background:#0D1B2A;color:white;padding:12px 20px}.hdr h1{margin:0;font-size:18px;font-weight:700}.hdr p{margin:3px 0 0;font-size:11px;color:#90CAF9}img{width:100%;display:block}.ftr{font-size:9px;padding:6px 20px;border-top:2px solid #0D1B2A;display:flex;justify-content:space-between;color:#333}</style></head><body><div class="hdr"><h1>PROJETO ELÉTRICO – INSTALAÇÕES DE BAIXA TENSÃO | NBR 5410:2023</h1><p>${lbl} | Proprietária: Vinícia Sampaio Ornellas | Av. Amaro Ribeiro Gomes, 236 – Campos dos Goytacazes/RJ</p></div><img src="${data}"/><div class="ftr"><span>Norma: NBR 5410:2023 / ABNT</span><span>Escala: Referência visual</span><span>Emitido em: ${new Date().toLocaleDateString('pt-BR')}</span></div><script>window.onload=function(){window.print()}<\/script></body></html>`);
+  w.document.write(`<!DOCTYPE html><html><head><title>Projeto Elétrico – ${lbl}</title><style>@page{size:A1 landscape;margin:0}body{margin:0;font-family:Arial,sans-serif}.hdr{background:#0D1B2A;color:white;padding:12px 20px}.hdr h1{margin:0;font-size:18px;font-weight:700}.hdr p{margin:3px 0 0;font-size:11px;color:#90CAF9}img{width:100%;display:block}.ftr{font-size:9px;padding:6px 20px;border-top:2px solid #0D1B2A;display:flex;justify-content:space-between;color:#333}</style></head><body><div class="hdr"><h1>PROJETO ELÉTRICO – INSTALAÇÕES DE BAIXA TENSÃO | NBR 5410:2023</h1><p>${lbl} | Proprietária: Vinícia Sampaio Ornellas | Av. Amaro Ribeiro Gomes, 236 – Campos dos Goytacazes/RJ</p></div><img src="${data}"/><div class="ftr"><span>Norma: NBR 5410:2023 / ABNT</span><span>Escala: Referência visual</span><span>Emitido em: ${new Date().toLocaleDateString('pt-BR')}</span></div><script>window.onload=function(){window.print()}<\/script>
+<!-- ── SISTEMA DE CONTROLE DE VERSÃO ──────────────────────────────────── -->
+<style>
+#ver-btn{position:fixed;bottom:16px;right:16px;background:#1565C0;color:white;border:none;
+  border-radius:20px;padding:6px 14px;font-size:11px;font-weight:700;cursor:pointer;
+  box-shadow:0 2px 8px #00000055;z-index:9999;display:flex;align-items:center;gap:6px;
+  font-family:'Segoe UI',Arial,sans-serif;transition:background .2s}
+#ver-btn:hover{background:#1976D2}
+#ver-badge{background:#4CAF50;color:white;border-radius:10px;padding:1px 7px;font-size:10px}
+#ver-panel{position:fixed;bottom:54px;right:16px;width:400px;background:#0D1B2A;
+  border:1px solid #1565C0;border-radius:10px;box-shadow:0 4px 20px #00000088;
+  z-index:9998;display:none;font-family:'Segoe UI',Arial,sans-serif;overflow:hidden}
+#ver-panel.open{display:block}
+#ver-header{background:#1565C0;padding:10px 14px;display:flex;justify-content:space-between;align-items:center}
+#ver-header span{color:white;font-weight:700;font-size:13px}
+#ver-close{background:none;border:none;color:white;cursor:pointer;font-size:16px;line-height:1}
+#ver-body{padding:12px 14px;max-height:340px;overflow-y:auto}
+.ver-row{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid #1E3A5F}
+.ver-row:last-child{border-bottom:none}
+.ver-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.ver-dot.current{background:#4CAF50}
+.ver-dot.old{background:#546E7A}
+.ver-sha{font-size:10px;color:#90CAF9;font-family:monospace;font-weight:700;flex-shrink:0;margin-top:1px}
+.ver-info{flex:1}
+.ver-msg{color:#CFD8DC;font-size:11px;line-height:1.4}
+.ver-date{color:#546E7A;font-size:10px;margin-top:2px}
+.ver-tag{background:#1E3A5F;color:#90CAF9;border-radius:4px;padding:1px 6px;font-size:9px;margin-left:6px}
+#ver-footer{background:#0a1628;padding:8px 14px;border-top:1px solid #1E3A5F;
+  display:flex;justify-content:space-between;align-items:center}
+#ver-footer span{color:#546E7A;font-size:10px}
+#ver-gh-link{color:#90CAF9;font-size:10px;text-decoration:none}
+#ver-gh-link:hover{color:white}
+#ver-status{display:flex;align-items:center;gap:6px;padding:8px 14px;background:#0a1628;border-bottom:1px solid #1E3A5F}
+#ver-status-dot{width:8px;height:8px;border-radius:50%;background:#4CAF50;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+#ver-status span{color:#90CAF9;font-size:11px}
+</style>
+
+<button id="ver-btn" onclick="document.getElementById('ver-panel').classList.toggle('open')">
+  ⚡ Versão <span id="ver-badge">v1.4.0</span>
+</button>
+
+<div id="ver-panel">
+  <div id="ver-header">
+    <span>📋 Histórico de Versões — Editor Elétrico NBR 5410</span>
+    <button id="ver-close" onclick="document.getElementById('ver-panel').classList.remove('open')">✕</button>
+  </div>
+  <div id="ver-status">
+    <div id="ver-status-dot"></div>
+    <span>Publicado em GitHub Pages · vinibeginer.github.io/projetos</span>
+  </div>
+  <div id="ver-body">
+    <div class="ver-row">
+      <div class="ver-dot current"></div>
+      <span class="ver-sha">8359ca0</span>
+      <div class="ver-info">
+        <div class="ver-msg">Plantas redesenhadas cota a cota com fidelidade ao projeto aprovado <span class="ver-tag">ATUAL</span></div>
+        <div class="ver-date">23/06/2026 · v1.4.0</div>
+      </div>
+    </div>
+    <div class="ver-row">
+      <div class="ver-dot old"></div>
+      <span class="ver-sha">e4dd93d</span>
+      <div class="ver-info">
+        <div class="ver-msg">Plantas com cotas precisas, sanitários, móveis e portas</div>
+        <div class="ver-date">23/06/2026 · v1.3.0</div>
+      </div>
+    </div>
+    <div class="ver-row">
+      <div class="ver-dot old"></div>
+      <span class="ver-sha">d0fd17a</span>
+      <div class="ver-info">
+        <div class="ver-msg">Planta limpa — apenas paredes, portas, janelas e escada (sem cotas/hachuras)</div>
+        <div class="ver-date">23/06/2026 · v1.2.0</div>
+      </div>
+    </div>
+    <div class="ver-row">
+      <div class="ver-dot old"></div>
+      <span class="ver-sha">900f0df</span>
+      <div class="ver-info">
+        <div class="ver-msg">Versão inicial do editor elétrico NBR 5410 com planta do PDF original</div>
+        <div class="ver-date">23/06/2026 · v1.0.0</div>
+      </div>
+    </div>
+  </div>
+  <div id="ver-footer">
+    <span>Repositório: Vinibeginer/projetos</span>
+    <a id="ver-gh-link" href="https://github.com/Vinibeginer/projetos/commits/main/editor-projeto-eletrico/index.html" target="_blank">Ver no GitHub →</a>
+  </div>
+</div>
+<!-- ── FIM CONTROLE DE VERSÃO ──────────────────────────────────────────── -->
+
+</body></html>`);
   w.document.close();
 });
 render();
 })();
 </script>
+
+<!-- ── SISTEMA DE CONTROLE DE VERSÃO ──────────────────────────────────── -->
+<style>
+#ver-btn{position:fixed;bottom:16px;right:16px;background:#1565C0;color:white;border:none;
+  border-radius:20px;padding:6px 14px;font-size:11px;font-weight:700;cursor:pointer;
+  box-shadow:0 2px 8px #00000055;z-index:9999;display:flex;align-items:center;gap:6px;
+  font-family:'Segoe UI',Arial,sans-serif;transition:background .2s}
+#ver-btn:hover{background:#1976D2}
+#ver-badge{background:#4CAF50;color:white;border-radius:10px;padding:1px 7px;font-size:10px}
+#ver-panel{position:fixed;bottom:54px;right:16px;width:400px;background:#0D1B2A;
+  border:1px solid #1565C0;border-radius:10px;box-shadow:0 4px 20px #00000088;
+  z-index:9998;display:none;font-family:'Segoe UI',Arial,sans-serif;overflow:hidden}
+#ver-panel.open{display:block}
+#ver-header{background:#1565C0;padding:10px 14px;display:flex;justify-content:space-between;align-items:center}
+#ver-header span{color:white;font-weight:700;font-size:13px}
+#ver-close{background:none;border:none;color:white;cursor:pointer;font-size:16px;line-height:1}
+#ver-body{padding:12px 14px;max-height:340px;overflow-y:auto}
+.ver-row{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid #1E3A5F}
+.ver-row:last-child{border-bottom:none}
+.ver-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.ver-dot.current{background:#4CAF50}
+.ver-dot.old{background:#546E7A}
+.ver-sha{font-size:10px;color:#90CAF9;font-family:monospace;font-weight:700;flex-shrink:0;margin-top:1px}
+.ver-info{flex:1}
+.ver-msg{color:#CFD8DC;font-size:11px;line-height:1.4}
+.ver-date{color:#546E7A;font-size:10px;margin-top:2px}
+.ver-tag{background:#1E3A5F;color:#90CAF9;border-radius:4px;padding:1px 6px;font-size:9px;margin-left:6px}
+#ver-footer{background:#0a1628;padding:8px 14px;border-top:1px solid #1E3A5F;
+  display:flex;justify-content:space-between;align-items:center}
+#ver-footer span{color:#546E7A;font-size:10px}
+#ver-gh-link{color:#90CAF9;font-size:10px;text-decoration:none}
+#ver-gh-link:hover{color:white}
+#ver-status{display:flex;align-items:center;gap:6px;padding:8px 14px;background:#0a1628;border-bottom:1px solid #1E3A5F}
+#ver-status-dot{width:8px;height:8px;border-radius:50%;background:#4CAF50;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+#ver-status span{color:#90CAF9;font-size:11px}
+</style>
+
+<button id="ver-btn" onclick="document.getElementById('ver-panel').classList.toggle('open')">
+  ⚡ Versão <span id="ver-badge">v1.4.0</span>
+</button>
+
+<div id="ver-panel">
+  <div id="ver-header">
+    <span>📋 Histórico de Versões — Editor Elétrico NBR 5410</span>
+    <button id="ver-close" onclick="document.getElementById('ver-panel').classList.remove('open')">✕</button>
+  </div>
+  <div id="ver-status">
+    <div id="ver-status-dot"></div>
+    <span>Publicado em GitHub Pages · vinibeginer.github.io/projetos</span>
+  </div>
+  <div id="ver-body">
+    <div class="ver-row">
+      <div class="ver-dot current"></div>
+      <span class="ver-sha">8359ca0</span>
+      <div class="ver-info">
+        <div class="ver-msg">Plantas redesenhadas cota a cota com fidelidade ao projeto aprovado <span class="ver-tag">ATUAL</span></div>
+        <div class="ver-date">23/06/2026 · v1.4.0</div>
+      </div>
+    </div>
+    <div class="ver-row">
+      <div class="ver-dot old"></div>
+      <span class="ver-sha">e4dd93d</span>
+      <div class="ver-info">
+        <div class="ver-msg">Plantas com cotas precisas, sanitários, móveis e portas</div>
+        <div class="ver-date">23/06/2026 · v1.3.0</div>
+      </div>
+    </div>
+    <div class="ver-row">
+      <div class="ver-dot old"></div>
+      <span class="ver-sha">d0fd17a</span>
+      <div class="ver-info">
+        <div class="ver-msg">Planta limpa — apenas paredes, portas, janelas e escada (sem cotas/hachuras)</div>
+        <div class="ver-date">23/06/2026 · v1.2.0</div>
+      </div>
+    </div>
+    <div class="ver-row">
+      <div class="ver-dot old"></div>
+      <span class="ver-sha">900f0df</span>
+      <div class="ver-info">
+        <div class="ver-msg">Versão inicial do editor elétrico NBR 5410 com planta do PDF original</div>
+        <div class="ver-date">23/06/2026 · v1.0.0</div>
+      </div>
+    </div>
+  </div>
+  <div id="ver-footer">
+    <span>Repositório: Vinibeginer/projetos</span>
+    <a id="ver-gh-link" href="https://github.com/Vinibeginer/projetos/commits/main/editor-projeto-eletrico/index.html" target="_blank">Ver no GitHub →</a>
+  </div>
+</div>
+<!-- ── FIM CONTROLE DE VERSÃO ──────────────────────────────────────────── -->
+
 </body>
 </html>
